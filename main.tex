@@ -1,0 +1,33 @@
+\documentclass[dvipdfmx, 11pt, oneside, openany]{jsbook}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{定理}[chapter]
+\newtheorem{definition}[theorem]{定義}
+\newtheorem{lemma}[theorem]{補題}
+\newtheorem{problem}[theorem]{問題}
+\newtheorem{example}[theorem]{例題}
+\renewcommand{\proofname}{\textbf{証明}}
+
+\setlength{\textwidth}{\fullwidth}
+
+\begin{document}
+  \part{曲線の基本概念}
+  \include{chap1}
+  \include{chap2}
+  \include{chap3}
+  \include{chap4}
+  \part{フレネ・セレの公式とその応用}
+  \include{chap5}
+  \include{chap6}
+  \include{chap7}
+  \include{chap8}
+  \include{chap9}
+  \part{理論から応用へ}
+  \include{chap10}
+  \include{chap11}
+\end{document}

@@ -1,0 +1,269 @@
+\chapter{曲線の曲がり具合}
+
+前章では長さにフォーカスして曲線を調べる方法を紹介しました。
+この章では、いよいよ曲線の曲がり具合に踏み込んでいきましょう。
+
+曲線の曲がり具合を調べるにはいくつか方法があると思いますが、円という分かりやすい曲線を基準にするのが良さそうです。
+なにしろ一つの円の曲がり具合は、どの点の周りでも同じだという感覚があるからです。
+であれば、もし曲線$(I,\gamma)$の点$\gamma(t)$での曲がり具合を、$\gamma(t)$に接する円の大きさ、つまり半径を基準にできそうです。
+この考え方で曲率が導かれます。
+
+また、円の半径$r$が大きくなればなるほど、一点のまわりでの曲がり具合は緩やかに見えます。
+逆に、円の半径$r$が小さければ小さいほど、一点のまわりでの曲がり具合は急になるように見えます。
+このことから、もし円を曲線の曲がり具合の基準とするなら、円の半径の逆数$1/r$が曲がり具合の「急さ」を表しているといえましょう。
+曲線に接する円の半径の逆数を曲率といいます。
+具体的に見ていきましょう。
+
+
+
+\section{曲率}
+
+$(I,\gamma)$は弧長パラメータ付け可能な曲線とします。
+点$t\in I$について、$\gamma(t)$に接する円がどんなものか実際に考えてみましょう。
+円は3点とれば一意に定まるので、「$\gamma(t)$に接している」と言える3点を曲線から取っていきましょう。
+
+例えばとても小さな実数$h>0$をとって、
+\[
+  \gamma(t-h), \gamma(t), \gamma(t+h)
+\]
+あたりを取ってきましょう。
+
+もし$\gamma(t-h), \gamma(t), \gamma(t+h)$が直線上にあるときは、これらの点を通る円というのは取れません。
+この場合は半径は$r=+\infty$とみなしておきましょう。
+
+$\gamma(t-h), \gamma(t), \gamma(t+h)$が直線上にない場合は、これらの点を通る円を考えることができます。
+記号が大変なので、
+\begin{align*}
+  p&:=\gamma(t-h)\\
+  q&:=\gamma(t)\\
+  r&:=\gamma(t+h)
+\end{align*}
+とします。
+$r$を求める円の半径とすると、初等的な幾何学の公式によって
+\[
+  r=\frac{|p-q||q-r||r-p|}{4S}
+\]
+となります。ここで$S$は三角形$pqr$の面積です。
+外積$(q-p)\times(r-p)$の絶対値は三角形の面積$S$をもう一つ合わせた平行四辺形の面積に等しいので、
+\begin{align*}
+  r&=\frac{|p-q||q-r||r-p|}{4S}\\
+  &=\frac{|p-q||q-r||r-p|}{2|(q-p)\times(r-p)|}
+\end{align*}
+となります。
+ここで$p=\gamma(t-h)$、$q=\gamma(t)$、$r=\gamma(t+h)$について、
+\begin{align*}
+  p&=\gamma(t-h)=\gamma(t)-\gamma'(t)h+\frac{h^2}{2}\gamma''(t)\\
+  r&=\gamma(t+h)=\gamma(t)+\gamma'(t)h+\frac{h^2}{2}\gamma''(t)
+\end{align*}
+と近似してみると、分母は2次までの近似を取って
+\begin{align*}
+  (q-p)\times(r-p)&=(-\gamma'(t)h+h^2\gamma''(t)/2)\times(\gamma'(t)h+h^2\gamma''(t)/2)\\
+  &=-h^3\gamma'(t)\times\gamma''(t)
+\end{align*}
+と計算できます。分子のほうは1次までの近似によって
+\begin{align*}
+  p-q&=-\gamma'(t)h\\
+  q-r&=-\gamma'(t)h\\
+  r-p&=2\gamma'(t)h
+\end{align*}
+で十分です。
+これらを代入して
+\[
+  r=\frac{|p-q||q-r||r-p|}{2|(q-p)\times(r-p)|}=\frac{|\gamma'(t)|^3h^3}{|\gamma'(t)\times\gamma''(t)|h^3}=\frac{|\gamma'(t)|^3}{|\gamma'(t)\times\gamma''(t)|}
+\]
+と求められます。
+
+もしも$\gamma$が既に弧長パラメータ付けされていれば、$|\gamma'(t)|=1$です。
+ゆえに
+\[
+  r=\frac{1}{|\gamma'(t)\times\gamma''(t)|}
+\]
+さらに弧長パラメータ付けされている場合は、もっと簡略化する方法があります。
+\begin{lemma}
+  $(I,\gamma)$を弧長パラメータ付け可能な曲線とし、$s=s(t)$をその弧長パラメータとする。
+  このとき
+  \[
+    \left|\frac{d\gamma(s)}{ds}\times\frac{d^2\gamma(s)}{ds^2}\right|=\left|\frac{d^2\gamma(s)}{ds^2}\right|
+  \]
+\end{lemma}
+\begin{proof}
+  弧長パラメータにおいて、$d\gamma(s)/ds$と$d^2\gamma(s)/ds^2$は直交していたから、外積の幾何学的性質から
+  \[
+    \left|\frac{d\gamma(s)}{ds}\times\frac{d^2\gamma(s)}{ds^2}\right|=\left|\frac{d\gamma(s)}{ds}\right|\left|\frac{d^2\gamma(s)}{ds^2}\right|
+  \]
+  が成り立つ。
+  ところが弧長パラメータにおいて$|d\gamma(s)/ds|=1$だったから、題意が従う。
+\end{proof}
+
+ゆえに、弧長パラメータづけされている曲線の曲率が次のように定義して差支えないことがわかりました。
+\begin{definition}
+  $(I,\gamma)$を弧長パラメータ付け可能な曲線とし、$s=s(t)$をその弧長パラメータとする。
+  このとき、$(I,\gamma)$の\textbf{曲率}は、以下で定義される。
+  \[
+    \kappa(s):=\left|\frac{d^2\gamma(s)}{ds^2}\right|
+  \]
+\end{definition}
+\noindent
+意外とシンプルになりましたね。
+
+
+
+\section{主法線ベクトルと従法線ベクトル}
+
+弧長パラメータづけられた曲線$\gamma$において、$d^2\gamma(s)/ds^2$の長さには曲率という意味があることが明らかになりました。
+そこで$d^2\gamma(s)/ds^2$を規格化したベクトルに名前を付けてやりましょう。
+\begin{definition}
+  $(I,\gamma)$を弧長パラメータ付け可能な曲線とし、$s=s(t)$をその弧長パラメータとする。
+  このとき
+  \[
+    e_2(s):=\frac{d^2\gamma(s)/ds^2}{|d^2\gamma(s)/ds^2|}
+  \]
+  を\textbf{主法線ベクトル}という\footnote{
+    主法線ベクトルは、物理的に考えると質点の軌道の二階微分なので、運動方程式から力が加わる方向に一致します。
+    「主」という言葉のチョイスは、接ベクトルに対して垂直な2次元平面があり、その中でも重要な意味のある法線ですよ、的な意味だと思います。
+  }。
+\end{definition}
+
+主法線ベクトルに$e_2$という番号を割り振ったのは、接ベクトルを規格化したものに$e_1$を割り振りたいからです。
+\begin{definition}
+  $(I,\gamma)$を弧長パラメータ付け可能な曲線とし、$s=s(t)$をその弧長パラメータとする。
+  このとき、
+  \[
+    e_1(s):=\frac{d\gamma(s)}{ds}
+  \]
+  を\textbf{単位接ベクトル}という\footnote{
+    弧長パラメータならすでに$|d\gamma(s)/ds|=1$なので、主法線ベクトルと違ってわざわざ規格化する必要はないです。
+  }。
+\end{definition}
+
+直交する二つのベクトル$e_1,e_2$が作れました。
+これらの外積で$\mathbb{R}^3$の基底が作れるので、ついでに名前を付けてやります。
+\begin{definition}
+  $(I,\gamma)$を弧長パラメータ付け可能な曲線とし、$s=s(t)$をその弧長パラメータとする。
+  このとき
+  \[
+    e_3(s):=e_1(s)\times e_2(s)
+  \]
+  を\textbf{従法線ベクトル}という。
+\end{definition}
+曲線$(I,\gamma)$の曲がり具合はこれらのベクトル値関数$e_1,e_2,e_3$で記述できそうです。
+ちなみに定義から明らかですが
+\[
+  e_i:s^{-1}(I)\to\mathbb{R}^3
+\]
+です。
+
+
+
+\section{例題：円、放物線、螺旋の曲率}
+
+\subsection{円}
+
+$r>0$に対して、弧長パラメータづけられた円
+\[
+  \gamma(s):=(r\cos(s/r),r\sin(s/r),0)
+\]
+について考えてみます。
+このとき
+\begin{align*}
+  \frac{d\gamma(s)}{ds}&=(-\sin(s/r),\cos(s/r),0)\\
+  \frac{d^2\gamma(s)}{ds^2}&=-\frac1{r}(\cos(s/r),\sin(s/r),0)\\
+\end{align*}
+となります。このことから
+\begin{align*}
+  e_1(s)&=(-\sin(s/r),\cos(s/r),0)\\
+  e_2(s)&=-(\cos(s/r),\sin(s/r),0)\\
+  e_3(s)&=(0,0,1)
+\end{align*}
+となります。また曲率は
+\[
+  \kappa(s)=|d^2\gamma(s)/ds^2|=\frac1{r}
+\]
+となります。
+「曲率は曲線に接する円の半径の逆数」という当初の目論見が当たっていそうですね。
+
+\subsection{常螺旋}
+
+$a,r>0$に対して
+\[
+  \gamma(t):=(r\cos(t),r\sin(t),at)
+\]
+で表される曲線を\textbf{常螺旋}(の特別な場合)といいます。
+$\gamma$は
+\[
+  |\gamma'(t)|=|(-r\sin(t),r\cos(t),a)|=\sqrt{r^2+a^2}\neq0
+\]
+なので、弧長パラメータ付け可能であり、その弧長パラメータは
+\[
+  s(t)=\int_0^t\sqrt{r^2+a^2}dt=t\sqrt{r^2+a^2}
+\]
+となります。
+ゆえに$\gamma$の弧長パラメータ表示は
+\[
+  \gamma(s)=\left(r\cos\left(\frac{s}{\sqrt{r^2+a^2}}\right),r\sin\left(\frac{s}{\sqrt{r^2+a^2}}\right),\frac{as}{\sqrt{r^2+a^2}}\right)
+\]
+となります。
+
+このとき、単位接ベクトルは
+\[
+  e_1(s)=\frac{d\gamma(s)}{ds}=\frac1{\sqrt{r^2+a^2}}\left(-r\sin\left(\frac{s}{\sqrt{r^2+a^2}}\right),r\cos\left(\frac{s}{\sqrt{r^2+a^2}}\right),a\right)
+\]
+と求まります。
+また、$e_2$を求めるために$\gamma$の二階微分を求めると
+\[
+  \frac{d^2\gamma(s)}{ds^2}=-\frac1{r^2+a^2}\left(r\cos\left(\frac{s}{\sqrt{r^2+a^2}}\right),r\sin\left(\frac{s}{\sqrt{r^2+a^2}}\right),0\right)
+\]
+なので、これの規格化は非常に簡単で
+\[
+  e_2(s)=-\left(\cos\left(\frac{s}{\sqrt{r^2+a^2}}\right),\sin\left(\frac{s}{\sqrt{r^2+a^2}}\right),0\right)
+\]
+となります。ゆえに$e_3$は
+\[
+  e_3(s)=e_1(s)\times e_2(s)=\frac1{\sqrt{r^2+a^2}}\left(a\sin\left(\frac{s}{\sqrt{r^2+a^2}}\right),-a\cos\left(\frac{s}{\sqrt{r^2+a^2}}\right),r\right)
+\]
+となります。
+
+曲率は
+\[
+  \kappa(s)=\left|\frac{d^2\gamma(s)}{ds^2}\right|=\frac{r}{r^2+a^2}
+\]
+となります。
+
+円の曲率$1/r$よりも小さいので、半径が同じなら常螺旋のほうが円よりも曲がり具合が緩やかだと言えます。
+これは$z$方向に引き延ばされる分があるからだと考えられます。
+そう思えば直感にも合ってる気がしますね。
+
+\subsection{放物線}
+
+\[
+  \gamma(t):=(t,t^2,0)
+\]
+を考えます。これは
+\[
+  \gamma'(t)=(1,2t,0)
+\]
+なので、弧長パラメータづけ可能です。
+この弧長パラメータを求めていくと、
+\[
+  s(t):=\int_0^t\sqrt{1+4x^2}dx
+\]
+なんですが、これを求めるのはだいぶだるいので答えだけ書くと
+\[
+  s(t)=\frac{t}{2}\sqrt{1+4t^2}+\frac{1}{4}\log(2t+\sqrt{1+4t^2})
+\]
+になります\footnote{
+  $2x=\tan(\theta)$と変換して、$-\pi/2<\theta<\pi/2$の範囲として、$(\tan(\theta))'=1/\cos^2(\theta)$などによる部分積分などして頑張ります。
+}。
+これを$t=t(s)$という形に明示的に書くのは非常に難しいので、いったんこのままの表示で進めていきます。
+
+まず単位接ベクトルを求めると
+\[
+  e_1(s)=\frac{d\gamma(s)}{ds}=\frac{d\gamma(t)}{dt}\frac{dt}{ds}=\frac1{ds/dt}\frac{d\gamma(t)}{dt}=\frac1{\sqrt{1+4t^2}}(1,2t,0)
+\]
+また、二階微分を求めると
+\begin{align*}
+  \frac{d^2\gamma(s)}{ds^2}&=\frac{d}{ds}e_1(s)\\
+  &=\frac1{ds/dt}\frac{d}{dt}\frac1{\sqrt{1+4t^2}}(1,2t,0)\\
+  &=\frac1{\sqrt{1+4t^2}}\left\{-\frac{4t}{(1+4t^2)^{3/2}}(1,2t,0)+\frac1{\sqrt{1+4t^2}}(0,2,0)\right\}\\
+  &=\frac1{(1+4t^2)^2}(-4t,2,0)
+\end{align*}

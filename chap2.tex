@@ -1,0 +1,275 @@
+\chapter{曲線の定義}
+
+\section{曲線のパラメータ表示}
+
+$I$を区間とします。
+僕たちは力学における質点の運動から話を始めたので、曲線の各点は二階微分可能かつ、その二階導関数が連続であるような写像（つまり$C^2$級写像）
+\[
+  \gamma:I\to\mathbb{R}^3
+\]
+を考えましょう。
+
+途中で途切れていたり、微分ができないぐらいギザギザしている曲線は今回は扱わないことにします。
+また、区間は連結なので、その像$\gamma(I)$も連結です。
+従って、$\gamma(I)$はまさしく3次元空間に浮かぶ曲線と呼ぶにふさわしいわけですね。
+
+以上をまとめて僕たちの曲線の定義としましょう。
+\begin{definition}
+  $I$を区間とする。このとき$C^2$写像$\gamma:I\to\mathbb{R}^3$を曲線とよび、組$(I,\gamma)$で表す。
+\end{definition}
+
+
+
+\section{接ベクトル}
+
+力学の時は、$\gamma':I\to\mathbb{R}^3$を速さ、あるいは\textbf{速度ベクトル}と呼びました。
+曲線論ではこれは単に\textbf{接ベクトル}と呼びます。
+
+これでもう力学からは切り離されたかのようです。
+その意味も込めて、一応定義として述べておきましょう。
+\begin{definition}
+  $(I,\gamma)$を曲線とする。このとき$\gamma':I\to\mathbb{R}^3$を曲線$(I,\gamma)$の\textbf{接ベクトル}と呼ぶ。
+\end{definition}
+
+
+
+\section{曲線の長さと弧長パラメータ表示}
+
+曲線を見て最初にこれの何を知りたいでしょうか？
+そう、長さですね。
+ということで最初に曲線の長さを求めていきましょう。
+
+まずは直感的な議論から始めましょう。
+微小な長さ$dx$、$dy$、$dz$がなす直角三角形の長さは、三平方の定理から
+\[
+  ds:=\sqrt{dx^2+dy^2+dz^2}
+\]
+になります。
+ここに$dx$、$dy$、$dz$に$\gamma$を代入するのですが、
+\[
+  \gamma'(t)=\frac{d\gamma}{dt}(t)=\left(\frac{d\gamma_1}{dt}(t),\frac{d\gamma_2}{dt}(t),\frac{d\gamma_3}{dt}(t)\right)
+\]
+とおくと、$\gamma$にそって曲線を$t$から微小区間$dt$だけ動かしたときの長さは、だいたい
+\[
+  dx=\frac{d\gamma_1}{dt}(t)dt,\quad dy=\frac{d\gamma_2}{dt}(t)dt,\quad dz=\frac{d\gamma_3}{dt}(t)dt
+\]
+となります。これを代入すると、
+\[
+  ds=\sqrt{\left(\frac{d\gamma_1}{dt}(t)\right)^2+\left(\frac{d\gamma_2}{dt}(t)\right)^2+\left(\frac{d\gamma_3}{dt}(t)\right)^2}=|\gamma'(t)|
+\]
+仮に定義域を$[a,b]$とすれば、これに沿って積分すれば曲線の長さが出てくるはずです。
+\[
+  \int_{\gamma(a)}^{\gamma(b)}ds=\int_a^b|\gamma'(t)|dt
+\]
+天下り的ではありますが、このことから曲線の長さを定義できます。
+\begin{definition}
+  $([a,b],\gamma)$を曲線とする。このとき曲線の長さを
+  \[
+    L([a,b],\gamma):=\int_a^b|\gamma'(t)|dt
+  \]
+  で定義する。
+\end{definition}
+
+\subsection{例題}
+
+\begin{example}
+  曲線
+  \[
+    \gamma:[0,1]\to\mathbb{R}^3;t\mapsto(t,0,0)
+  \]
+  の長さを求めよ。
+\end{example}
+すぐ1と出てきますが、定義に従って1になることを確かめましょう。
+まず$\gamma'(t)=(1,0,0)$なので、求める積分は
+\[
+  L([0,1],\gamma)=\int_0^1\sqrt{1^2+0^2+0^2}dt=\int_0^1dt=[t]_0^1=1-0=1
+\]
+となります。いいですねぇ。
+
+\begin{example}
+  曲線
+  \[
+    \gamma:[0,1]\to\mathbb{R}^3;t\mapsto(t,t,t)
+  \]
+  の長さを求めよ。
+\end{example}
+これも$\sqrt{3}$になるはずです。積分してみましょう。
+まず$\gamma'(t)=(1,1,1)$より
+\[
+  L([0,1],\gamma)=\int_0^1\sqrt{1^2+1^2+1^2}dt=\int_0^1\sqrt{3}dt=[\sqrt{3}t]_0^1=\sqrt{3}-0=\sqrt{3}
+\]
+となります。よきよき。
+
+\begin{example}
+  曲線
+  \[
+    \gamma:[0,1]\to\mathbb{R}^3;t\mapsto(\cos(2\pi t),\sin(2\pi t),0)
+  \]
+  の長さを求めよ
+\end{example}
+これは円周の長さが出てくるはずです。
+まず$\gamma'(t)=2\pi(-\sin(2\pi t),\cos(2\pi t),0)$なので、
+\[
+  L([0,1],\gamma)=\int_0^1\sqrt{4\pi^2\sin^2(t)+4\pi^2\cos^2(t)}dt=\int_0^12\pi dt=[2\pi t]_0^1=2\pi
+\]
+となります。よしよし。大丈夫そうですね！
+
+\subsection{弧長パラメータ}
+
+曲線$(I,\gamma)$のパラメータ$t$をうまくとることを考えましょう。
+調べたいのは曲線であって、パラメータのほうではないから、都合のいいパラメータをとっておくと便利そうです。
+例えば$[a,b]$上の曲線のとき、基点を0にしたパラメータ表示として
+\[
+  u:=t-a
+\]
+で定義すると、$\gamma(u+a)$はパラメータ$u$としては0から始まります。
+
+さらに良いパラメータは、$0$から$s$の区間の長さが、ちょうど曲線の長さ$L([a,a+s],\gamma)$になるものを取れると今後便利です。
+そのようなパラメータ表示を調べるために、まずそういうものがあるものとして、そのパラメータの性質をちょっと考えてみましょう。
+まず
+\[
+  u=s(t)\iff t=s^{-1}(u)
+\]
+とおいてみます。これが求めるパラメータになっているとすると、
+\[
+  s(t)=\int_a^t|\gamma'(t)|dt
+\]
+です。
+
+弧長パラメータはこれでいいといえばいいのですが、この変換がうまくいっているかどうかが非自明です。
+なにをもってうまくいっているかですが、\textbf{$s(t)$の微分が突然消えたりしないかどうかが不安}です。
+もしそうなっているとすると、曲線のパラメトライズが途中で止まってしまって、どうもうまくパラメータづけられた気がしません。
+ということで調べてみましょう。
+弧長パラメータの定義の両辺を$t$で微分すると、微分積分学の基本定理より
+\[
+  s'(t)=|\gamma'(t)|
+\]
+となっています。
+ゆえに$\gamma'(t)$の各成分がすべて一斉に0になるとき、$s'(t)$も0になってしまい、いかにもまずいです。
+そういうのを避けながら、曲線の弧長パラメータの定義を得ます。
+\begin{definition}
+  $([a,b],\gamma)$を曲線であって、$|\gamma'(t)|\neq0$ (${}^\forall t\in [a,b]$)とする。
+  このとき曲線$([a,b],\gamma)$は\textbf{弧長パラメータ付け可能である}といい、
+  \[
+    s(t):=\int_a^t|\gamma'(t)|dt
+  \]
+  をその\textbf{弧長パラメータ}という。
+\end{definition}
+定義から以下は明らかでしょう。
+\begin{theorem}
+  $([a,b],\gamma)$を弧長パラメータ付け可能な曲線とし、$s(t)$をその弧長パラメータとする。
+  このとき、
+  \[
+    s(t)=L([a,t],\gamma)
+  \]
+  がなりたつ。
+\end{theorem}
+
+\subsection{例題}
+
+\begin{example}
+  曲線
+  \[
+    \gamma:[0,1]\to\mathbb{R}^3;t\mapsto(t,0,0)
+  \]
+  の弧長パラメータを求めよ。
+\end{example}
+既に弧長パラメータになっていますが、一応確認しましょう。
+まず$\gamma'(t)=(1,0,0)$なので、求める積分は
+\[
+  s(t)=\int_0^tdt=t
+\]
+です。面白くはないですね。
+
+\begin{example}
+  曲線
+  \[
+    \gamma:[0,1]\to\mathbb{R}^3;t\mapsto(t,t,t)
+  \]
+  の弧長パラメータを求めよ。
+\end{example}
+まず$\gamma'(t)=(1,1,1)$より
+\[
+  s(t)=\int_0^t\sqrt{1^2+1^2+1^2}dt=\int_0^t\sqrt{3}dt=[\sqrt{3}t]_0^t=\sqrt{3}t-0=\sqrt{3}t
+\]
+となります。これによって$\gamma$は
+\[
+  \gamma(\sqrt{3}t)=\sqrt{3}(t,t,t)
+\]
+となっていて、$\sqrt{3}t$は$0$から$t$までの$\gamma$の像の長さになっていますね。
+
+\begin{example}
+  曲線
+  \[
+    \gamma:[0,1]\to\mathbb{R}^3;t\mapsto(\cos(2\pi t),\sin(2\pi t),0)
+  \]
+  の弧長パラメータを求めよ。
+\end{example}
+まず$\gamma'(t)=2\pi(-\sin(2\pi t),\cos(2\pi t),0)$なので、
+\[
+  s(t)=\int_0^t\sqrt{4\pi^2\sin^2(t)+4\pi^2\cos^2(t)}dt=\int_0^t2\pi dt=[2\pi t]_0^t=2\pi t
+\]
+となります。これも弧長がパラメータの値と一致していますね。
+
+\begin{example}
+  曲線
+  \[
+    \gamma:[-1,1]\to\mathbb{R}^3;t\mapsto(t^2,t^3,0)
+  \]
+  は、弧長パラメータ付けが可能であるか？
+\end{example}
+これは弧長パラメータ付けが可能ではありません。
+実際、
+\begin{align*}
+  |\gamma'(t)|=\sqrt{4t^2+9t^4}
+\end{align*}
+となり、$t=0$で$|\gamma'(0)|=0$となってしまうからです。
+この例は尖点と呼ばれる有名な例ですので、覚えておいてもいいです。
+
+
+
+\section{弧長パラメータの性質}
+
+曲線の弧長パラメータ表示は、以下に示すようによさそう性質がたくさんあり、このことから曲線論では珍重されています。
+
+\begin{theorem}
+  $(I,\gamma)$を弧長パラメータ付け可能な曲線とし、$s=s(t)$をその弧長パラメータとする。
+  このとき
+  \[
+    \left|\frac{d\gamma(s)}{ds}\right|=1
+  \]
+\end{theorem}
+\begin{proof}
+  合成微分の法則から
+  \[
+    \frac{d\gamma(s)}{ds}=\frac{d\gamma(t)}{dt}\frac{dt(s)}{ds}=\gamma'(t)\left(\frac{ds(t)}{dt}\right)
+  \]
+  ところが$s$の定義から
+  \[
+    \frac{ds(t)}{dt}=\frac{d}{dt}\int_a^t|\gamma'(t)|dt=|\gamma'(t)|
+  \]
+  ゆえに
+  \[
+    \frac{d\gamma(s)}{ds}=\frac{\gamma'(t)}{|\gamma'(t)|}
+  \]
+  よって
+  \[
+    \left|\frac{d\gamma(s)}{ds}\right|=\frac{|\gamma'(t)|}{|\gamma'(t)|}=1
+  \]
+\end{proof}
+
+\begin{theorem}
+  $(I,\gamma)$を弧長パラメータ付け可能な曲線、$s=s(t)$を弧長パラメータとする。
+  このとき、
+  \[
+    \frac{d\gamma(s)}{ds}\cdot\frac{d^2\gamma(s)}{ds^2}=0
+  \]
+\end{theorem}
+\begin{proof}
+  $|d\gamma(s)/ds|=1$なので、両辺を二乗して$d\gamma(s)/ds\cdot\gamma(s)/ds=1$を得る。
+  この両辺を微分することで
+  \[
+    2\frac{d\gamma(s)}{ds}\cdot\frac{d^2\gamma(s)}{ds^2}=0
+  \]
+  が得られるため、題意を得る。
+\end{proof}
