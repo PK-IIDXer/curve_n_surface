@@ -1,6 +1,118 @@
-\chapter{フレネ標構}
+\chapter{フレネ・セレの公式}
 
-\section{曲線に対する正規直行基底}
+弧長パラメータづけ可能な曲線であって、弧長パラメータに関する二階微分が消えないものに対して、単位接ベクトル・主法線ベクトル・従法線ベクトルを導入しました。
+これらをまとめて\textbf{フレネ標構}とも言います。
+ことフレネ標構というときは、
+\[
+  \begin{pmatrix}
+    e_1(s)\\
+    e_2(s)\\
+    e_3(s)
+  \end{pmatrix}
+\]
+と並べたベクトル（というよりも行列）をさします。
+このように並べてみると、ちょっと面白い公式が成り立ちます。
+
+
+
+\section{フレネ標構を微分する}
+
+$I$を区間、$(I,\gamma)$を弧長パラメータづけ可能な曲線であって、$s=s(t)$を弧長パラメータとします。
+また
+\[
+  \frac{d^2\gamma(t(s))}{ds^2}\neq0\quad({}^\forall s\in s(I))
+\]
+をみたすとします。
+つまりフレネ標構を考えることができる状況ですね。
+
+\subsection{単位接ベクトルの微分}
+
+まず単位接ベクトルの定義は
+\[
+  e_1(s):=\frac{d\gamma(t(s))}{ds}
+\]
+でした。
+また曲率の定義は
+\[
+  \kappa(s):=\left|\frac{d^2\gamma(t(s))}{ds^2}\right|
+\]
+であり、主法線ベクトル$e_2$の定義は
+\[
+  e_2(s):=\frac{d^2\gamma(t(s))/ds^2}{|d^2\gamma(t(s))/ds^2|}
+\]
+だったので、
+\[
+  \frac{de_1(s)}{ds}=\frac{d^2\gamma(t(s))}{ds^2}=\kappa(s)e_2(s)
+\]
+となります。
+
+\subsection{主法線ベクトルの微分}
+
+ここからは主法線ベクトル
+\[
+  e_2(s):=\frac{d^2\gamma(t(s))/ds^2}{|d^2\gamma(t(s))/ds^2|}=\frac{d^2\gamma(t(s))/ds^2}{\kappa(s)}
+\]
+の微分が出てくるので、曲線$\gamma$はさらに三階微分可能でもあるという仮定を加えます。
+ここで、フレネ標構が$\mathbb{R}^3$の正規直交基底を張っているということをフルに活用していきます。
+つまり
+\[
+  \frac{de_i(s)}{ds}=a_ie_1(s)+b_ie_2(s)+c_ie_3(s)\quad(i=1,2,3)
+\]
+となる$a_i,b_i,c_i$があるとして、それを探しましょう、ということです。
+
+\subsubsection{$i=1$のとき}
+
+まず$e_1(s)=d\gamma(t(s))/ds$を両辺に内積すると、まず右辺は
+\[
+  e_1(s)\cdot(a_1e_1(s)+b_1e_2(s)+c_1e_3(s))=a_1
+\]
+となります。一方左辺は
+\begin{align*}
+ a_1=e_1(s)\cdot\frac{de_1(s)}{ds}=e_1(s)\cdot\kappa(s)e_2(s)=0
+\end{align*}
+となります。消えました。
+
+$e_2(s)$を内積すると、
+\begin{align*}
+  b_1=e_2(s)\cdot\frac{de_1(s)}{ds}=e_2(s)\cdot\kappa(s)e_2(s)=\kappa(s)
+\end{align*}
+となります。曲率になりました。
+
+$e_3(s)$を内積すると、
+\begin{align*}
+  c_1=e_3(s)\cdot\frac{de_1(s)}{ds}=e_3(s)\cdot\kappa(s)e_2(s)=0
+\end{align*}
+となり消えました。
+まとめると
+\[
+  \frac{de_1(s)}{ds}=\kappa(s)e_2(s)
+\]
+
+\subsubsection{$i=2$のとき}
+
+$e_1(s)$を内積すると
+\begin{align*}
+  a_2&=e_1(s)\cdot\frac{de_2(s)}{ds}\\
+  &=\frac{d}{ds}\left(e_1(s)\cdot e_2(s)\right)-\frac{de_1(s)}{ds}\cdot e_2(s)\\
+  &=-\kappa(s)
+\end{align*}
+
+$e_2(s)$を内積すると
+\begin{align*}
+  b_2&=e_2(s)\cdot\frac{de_2(s)}{ds}\\
+  &=\frac12\frac{d}{ds}\left(e_2(s)\cdot e_2(s)\right)\\
+  &=0
+\end{align*}
+
+$e_3(s)$を内積すると
+\begin{align*}
+  c_2&=e_3(s)\cdot\frac{de_2(s)}{ds}\\
+  &=(e_1(s)\times e_2(s))\cdot\frac{de_2(s)}{ds}\\
+  &=e_1(s)\cdot\left(e_2(s)\times\frac{de_2(s)}{ds}\right)
+\end{align*}
+
+TODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODO
+
 
 \section{曲線に沿ったフレネ標構の動きを見る}
 

@@ -163,7 +163,48 @@ $I$を区間とします。
     s(t)=L([a,t],\gamma)
   \]
   がなりたつ。
+  特に$s(t)$は可微分な単調増加関数である。
 \end{theorem}
+
+$(I,\gamma)$を弧長パラメータ付け可能な曲線、その弧長パラメータ$s=s(t)$とします。
+この
+\[
+  s:I\to s(I)
+\]
+という関数は、いわば$t$から$s$への変数変換です。
+なのでその逆関数
+\[
+  t:s(I)\to I;s\mapsto s(t)
+\]
+を用いて、$\gamma$を変数$s$で書けます。
+\[
+  \gamma(t)=\gamma(t(s))
+\]
+これを$\gamma$の\textbf{弧長パラメータ表示}といいます。
+
+ほとんどの教科書ではこれを
+\[
+  \gamma(t(s))=\gamma(s)
+\]
+と書くのですが、
+\begin{center}
+  \Huge{
+    紛らわしすぎるだろ！！！
+  }
+\end{center}
+と思ってます。
+なので僕は基本的にこの記法を採用せず、常に
+\[
+  \gamma(t(s))
+\]
+と書きます。
+
+またこうなってくると、\textbf{どの変数で微分したか}というのが紛らわしくなってきます。
+なので今まで使用していた微分の記法$\gamma'$をやめて、
+\[
+  \frac{d\gamma(t)}{dt}
+\]
+などを用いるようにします。
 
 \subsection{例題}
 
@@ -175,7 +216,7 @@ $I$を区間とします。
   の弧長パラメータを求めよ。
 \end{example}
 既に弧長パラメータになっていますが、一応確認しましょう。
-まず$\gamma'(t)=(1,0,0)$なので、求める積分は
+まず$d\gamma(t)/dt=(1,0,0)$なので、求める積分は
 \[
   s(t)=\int_0^tdt=t
 \]
@@ -188,7 +229,7 @@ $I$を区間とします。
   \]
   の弧長パラメータを求めよ。
 \end{example}
-まず$\gamma'(t)=(1,1,1)$より
+まず$d\gamma(t)/dt=(1,1,1)$より
 \[
   s(t)=\int_0^t\sqrt{1^2+1^2+1^2}dt=\int_0^t\sqrt{3}dt=[\sqrt{3}t]_0^t=\sqrt{3}t-0=\sqrt{3}t
 \]
@@ -205,7 +246,7 @@ $I$を区間とします。
   \]
   の弧長パラメータを求めよ。
 \end{example}
-まず$\gamma'(t)=2\pi(-\sin(2\pi t),\cos(2\pi t),0)$なので、
+まず$d\gamma(t)/dt=2\pi(-\sin(2\pi t),\cos(2\pi t),0)$なので、
 \[
   s(t)=\int_0^t\sqrt{4\pi^2\sin^2(t)+4\pi^2\cos^2(t)}dt=\int_0^t2\pi dt=[2\pi t]_0^t=2\pi t
 \]
@@ -221,9 +262,9 @@ $I$を区間とします。
 これは弧長パラメータ付けが可能ではありません。
 実際、
 \begin{align*}
-  |\gamma'(t)|=\sqrt{4t^2+9t^4}
+  \left|\frac{d\gamma(t)}{dt}\right|=\sqrt{4t^2+9t^4}
 \end{align*}
-となり、$t=0$で$|\gamma'(0)|=0$となってしまうからです。
+となり、$t=0$で$|d\gamma(0)/dt|=0$となってしまうからです。
 この例は尖点と呼ばれる有名な例ですので、覚えておいてもいいです。
 
 
@@ -234,42 +275,54 @@ $I$を区間とします。
 
 \begin{theorem}
   $(I,\gamma)$を弧長パラメータ付け可能な曲線とし、$s=s(t)$をその弧長パラメータとする。
-  このとき
+  $d\gamma(t(s))/ds\neq0$となる任意の$s\in s(I)$に対して、以下が成り立つ。
   \[
-    \left|\frac{d\gamma(s)}{ds}\right|=1
+    \left|\frac{d\gamma(t(s))}{ds}\right|=1
   \]
 \end{theorem}
 \begin{proof}
-  合成微分の法則から
+  合成関数の微分と逆関数の微分から
   \[
-    \frac{d\gamma(s)}{ds}=\frac{d\gamma(t)}{dt}\frac{dt(s)}{ds}=\gamma'(t)\left(\frac{ds(t)}{dt}\right)
+    \frac{d\gamma(t(s))}{ds}=\frac{d\gamma(t)}{dt}\frac{dt(s)}{ds}=\frac{d\gamma(t)/dt}{ds(t)/dt}
   \]
   ところが$s$の定義から
   \[
-    \frac{ds(t)}{dt}=\frac{d}{dt}\int_a^t|\gamma'(t)|dt=|\gamma'(t)|
+    \frac{ds(t)}{dt}=\frac{d}{dt}\int_a^t\left|\frac{d\gamma(t)}{dt}\right|dt=\left|\frac{d\gamma(t)}{dt}\right|
   \]
   ゆえに
   \[
-    \frac{d\gamma(s)}{ds}=\frac{\gamma'(t)}{|\gamma'(t)|}
+    \frac{d\gamma(t(s))}{ds}=\frac{d\gamma(t)/dt}{|d\gamma(t)/dt|}
   \]
   よって
   \[
-    \left|\frac{d\gamma(s)}{ds}\right|=\frac{|\gamma'(t)|}{|\gamma'(t)|}=1
+    \left|\frac{d\gamma(t(s))}{ds}\right|=\frac{|d\gamma(t)/dt|}{|d\gamma(t)/dt|}=1
   \]
 \end{proof}
 
+微分の長さが1ということから、一階微分と二階微分のよさそうな関係が得られます。
 \begin{theorem}
   $(I,\gamma)$を弧長パラメータ付け可能な曲線、$s=s(t)$を弧長パラメータとする。
   このとき、
   \[
-    \frac{d\gamma(s)}{ds}\cdot\frac{d^2\gamma(s)}{ds^2}=0
+    \frac{d\gamma(t(s))}{ds}\cdot\frac{d^2\gamma(t(s))}{ds^2}=0
   \]
 \end{theorem}
 \begin{proof}
-  $|d\gamma(s)/ds|=1$なので、両辺を二乗して$d\gamma(s)/ds\cdot\gamma(s)/ds=1$を得る。
+  $|d\gamma(t(s))/ds|=1$なので、両辺を二乗して$d\gamma(t(s))/ds\cdot\gamma(t(s))/ds=1$を得る。
   この両辺を微分することで
   \[
-    2\frac{d\gamma(s)}{ds}\cdot\frac{d^2\gamma(s)}{ds^2}=0
+    2\frac{d\gamma(t(s))}{ds}\cdot\frac{d^2\gamma(t(s))}{ds^2}=0
   \]
   が得られるため、題意を得る。
 \end{proof}
+
+もし$d^2\gamma(t(s))/ds^2\neq0$であれば、これは$d\gamma(t(s))/ds$と直交するということです。
+この二つが張る平面は便利そうです。
+\begin{definition}\label{definition:tangent_plane}
+  $I$を区間、$\gamma:I\to\mathbb{R}^3$を弧長パラメータ付け可能な曲線とし、$s=s(t)$をその弧長パラメータとする。
+  さらに$d^2\gamma(t(s))/ds^2\neq0$を満たす$s\in s(I)$に対して、
+  \[
+    T_{\gamma(t(s))}:=\left\{a\frac{d\gamma(t(s))}{ds}+b\frac{d^2\gamma(t(s))}{ds^2}\mid a,b\in\mathbb{R}\right\}
+  \]
+  を、$\gamma(t(s))$における曲線$\gamma$の\textbf{接触平面}と呼ぶ。
+\end{definition}

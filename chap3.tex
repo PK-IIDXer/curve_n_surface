@@ -52,47 +52,43 @@ $r$を求める円の半径とすると、初等的な幾何学の公式によ�
 となります。
 ここで$p=\gamma(t-h)$、$q=\gamma(t)$、$r=\gamma(t+h)$について、
 \begin{align*}
-  p&=\gamma(t-h)=\gamma(t)-\gamma'(t)h+\frac{h^2}{2}\gamma''(t)\\
-  r&=\gamma(t+h)=\gamma(t)+\gamma'(t)h+\frac{h^2}{2}\gamma''(t)
+  p&=\gamma(t-h)=\gamma(t)-\frac{d\gamma(t)}{dt}h+\frac{h^2}{2}\frac{d^2\gamma(t)}{dt^2}\\
+  r&=\gamma(t+h)=\gamma(t)+\frac{\gamma(t)}{dt}h+\frac{h^2}{2}\frac{d^2\gamma(t)}{dt^2}
 \end{align*}
 と近似してみると、分母は2次までの近似を取って
 \begin{align*}
-  (q-p)\times(r-p)&=(-\gamma'(t)h+h^2\gamma''(t)/2)\times(\gamma'(t)h+h^2\gamma''(t)/2)\\
-  &=-h^3\gamma'(t)\times\gamma''(t)
+  (q-p)\times(r-p)&=\left(-\frac{d\gamma(t)}{dt}h+\frac{h^2}{2}\frac{d^2\gamma(t)}{dt^2}\right)\times\left(\frac{d\gamma(t)}{dt}h+\frac{h^2}{2}\frac{d^2\gamma(t)}{dt^2}\right)\\
+  &=-h^3\frac{d\gamma(t)}{dt}\times\frac{d^2\gamma(t)}{dt^2}
 \end{align*}
 と計算できます。分子のほうは1次までの近似によって
 \begin{align*}
-  p-q&=-\gamma'(t)h\\
-  q-r&=-\gamma'(t)h\\
-  r-p&=2\gamma'(t)h
+  p-q&=-\frac{d\gamma(t)}{dt}h\\
+  q-r&=-\frac{d\gamma(t)}{dt}h\\
+  r-p&=2\frac{d\gamma(t)}{dt}h
 \end{align*}
 で十分です。
 これらを代入して
 \[
-  r=\frac{|p-q||q-r||r-p|}{2|(q-p)\times(r-p)|}=\frac{|\gamma'(t)|^3h^3}{|\gamma'(t)\times\gamma''(t)|h^3}=\frac{|\gamma'(t)|^3}{|\gamma'(t)\times\gamma''(t)|}
+  r=\frac{|p-q||q-r||r-p|}{2|(q-p)\times(r-p)|}=\frac{|d\gamma(t)/dt|^3h^3}{|(d\gamma(t)/dt)\times(d^2\gamma(t)/dt^2)|h^3}=\frac{|d\gamma(t)/dt|^3}{|(d\gamma(t)/dt)\times(d^2\gamma(t)/dt^2)|}
 \]
 と求められます。
 
-もしも$\gamma$が既に弧長パラメータ付けされていれば、$|\gamma'(t)|=1$です。
-ゆえに
-\[
-  r=\frac{1}{|\gamma'(t)\times\gamma''(t)|}
-\]
+もしも$\gamma$が既に弧長パラメータ付けされていれば、$|d\gamma(t(s))/ds|=1$です。
 さらに弧長パラメータ付けされている場合は、もっと簡略化する方法があります。
 \begin{lemma}
   $(I,\gamma)$を弧長パラメータ付け可能な曲線とし、$s=s(t)$をその弧長パラメータとする。
   このとき
   \[
-    \left|\frac{d\gamma(s)}{ds}\times\frac{d^2\gamma(s)}{ds^2}\right|=\left|\frac{d^2\gamma(s)}{ds^2}\right|
+    \left|\frac{d\gamma(t(s))}{ds}\times\frac{d^2\gamma(t(s))}{ds^2}\right|=\left|\frac{d^2\gamma(t(s))}{ds^2}\right|
   \]
 \end{lemma}
 \begin{proof}
-  弧長パラメータにおいて、$d\gamma(s)/ds$と$d^2\gamma(s)/ds^2$は直交していたから、外積の幾何学的性質から
+  弧長パラメータにおいて、$d\gamma(t(s))/ds$と$d^2\gamma(t(s))/ds^2$は直交していたから、外積の幾何学的性質から
   \[
-    \left|\frac{d\gamma(s)}{ds}\times\frac{d^2\gamma(s)}{ds^2}\right|=\left|\frac{d\gamma(s)}{ds}\right|\left|\frac{d^2\gamma(s)}{ds^2}\right|
+    \left|\frac{d\gamma(t(s))}{ds}\times\frac{d^2\gamma(t(s))}{ds^2}\right|=\left|\frac{d\gamma(t(s))}{ds}\right|\left|\frac{d^2\gamma(t(s))}{ds^2}\right|
   \]
   が成り立つ。
-  ところが弧長パラメータにおいて$|d\gamma(s)/ds|=1$だったから、題意が従う。
+  ところが弧長パラメータにおいて$|d\gamma(t(s))/ds|=1$だったから、題意が従う。
 \end{proof}
 
 ゆえに、弧長パラメータづけされている曲線の曲率が次のように定義して差支えないことがわかりました。
@@ -100,7 +96,7 @@ $r$を求める円の半径とすると、初等的な幾何学の公式によ�
   $(I,\gamma)$を弧長パラメータ付け可能な曲線とし、$s=s(t)$をその弧長パラメータとする。
   このとき、$(I,\gamma)$の\textbf{曲率}は、以下で定義される。
   \[
-    \kappa(s):=\left|\frac{d^2\gamma(s)}{ds^2}\right|
+    \kappa(s):=\left|\frac{d^2\gamma(t(s))}{ds^2}\right|
   \]
 \end{definition}
 \noindent
@@ -110,13 +106,18 @@ $r$を求める円の半径とすると、初等的な幾何学の公式によ�
 
 \section{主法線ベクトルと従法線ベクトル}
 
-弧長パラメータづけられた曲線$\gamma$において、$d^2\gamma(s)/ds^2$の長さには曲率という意味があることが明らかになりました。
-そこで$d^2\gamma(s)/ds^2$を規格化したベクトルに名前を付けてやりましょう。
+弧長パラメータづけられた曲線$\gamma$において、$d^2\gamma(t(s))/ds^2$の長さには曲率という意味があることが明らかになりました。
+そこで$d^2\gamma(t(s))/ds^2$を規格化したベクトルに名前を付けてやりましょう。
 \begin{definition}
   $(I,\gamma)$を弧長パラメータ付け可能な曲線とし、$s=s(t)$をその弧長パラメータとする。
+  さらに
+  \[
+    \frac{d^2\gamma(t(s))}{ds^2}\neq0\quad({}^\forall s\in s(I))
+  \]
+  を満たすとする。
   このとき
   \[
-    e_2(s):=\frac{d^2\gamma(s)/ds^2}{|d^2\gamma(s)/ds^2|}
+    e_2(s):=\frac{d^2\gamma(t(s))/ds^2}{|d^2\gamma(t(s))/ds^2|}=\frac{d^2\gamma(t(s))/ds^2}{\kappa(s)}
   \]
   を\textbf{主法線ベクトル}という\footnote{
     主法線ベクトルは、物理的に考えると質点の軌道の二階微分なので、運動方程式から力が加わる方向に一致します。
@@ -129,10 +130,10 @@ $r$を求める円の半径とすると、初等的な幾何学の公式によ�
   $(I,\gamma)$を弧長パラメータ付け可能な曲線とし、$s=s(t)$をその弧長パラメータとする。
   このとき、
   \[
-    e_1(s):=\frac{d\gamma(s)}{ds}
+    e_1(s):=\frac{d\gamma(t(s))}{ds}
   \]
   を\textbf{単位接ベクトル}という\footnote{
-    弧長パラメータならすでに$|d\gamma(s)/ds|=1$なので、主法線ベクトルと違ってわざわざ規格化する必要はないです。
+    弧長パラメータならすでに$|d\gamma(t(s))/ds|=1$なので、主法線ベクトルと違ってわざわざ規格化する必要はないです。
   }。
 \end{definition}
 
@@ -140,18 +141,17 @@ $r$を求める円の半径とすると、初等的な幾何学の公式によ�
 これらの外積で$\mathbb{R}^3$の基底が作れるので、ついでに名前を付けてやります。
 \begin{definition}
   $(I,\gamma)$を弧長パラメータ付け可能な曲線とし、$s=s(t)$をその弧長パラメータとする。
+  さらに
+  \[
+    \frac{d^2\gamma(t(s))}{ds^2}\neq0\quad({}^\forall s\in s(I))
+  \]
+  を満たすとする。
   このとき
   \[
     e_3(s):=e_1(s)\times e_2(s)
   \]
   を\textbf{従法線ベクトル}という。
 \end{definition}
-曲線$(I,\gamma)$の曲がり具合はこれらのベクトル値関数$e_1,e_2,e_3$で記述できそうです。
-ちなみに定義から明らかですが
-\[
-  e_i:s^{-1}(I)\to\mathbb{R}^3
-\]
-です。
 
 
 
@@ -161,13 +161,13 @@ $r$を求める円の半径とすると、初等的な幾何学の公式によ�
 
 $r>0$に対して、弧長パラメータづけられた円
 \[
-  \gamma(s):=(r\cos(s/r),r\sin(s/r),0)
+  \gamma(t(s)):=(r\cos(s/r),r\sin(s/r),0)
 \]
 について考えてみます。
 このとき
 \begin{align*}
-  \frac{d\gamma(s)}{ds}&=(-\sin(s/r),\cos(s/r),0)\\
-  \frac{d^2\gamma(s)}{ds^2}&=-\frac1{r}(\cos(s/r),\sin(s/r),0)\\
+  \frac{d\gamma(t(s))}{ds}&=(-\sin(s/r),\cos(s/r),0)\\
+  \frac{d^2\gamma(t(s))}{ds^2}&=-\frac1{r}(\cos(s/r),\sin(s/r),0)\\
 \end{align*}
 となります。このことから
 \begin{align*}
@@ -177,7 +177,7 @@ $r>0$に対して、弧長パラメータづけられた円
 \end{align*}
 となります。また曲率は
 \[
-  \kappa(s)=|d^2\gamma(s)/ds^2|=\frac1{r}
+  \kappa(s)=|d^2\gamma(t(s))/ds^2|=\frac1{r}
 \]
 となります。
 「曲率は曲線に接する円の半径の逆数」という当初の目論見が当たっていそうですね。
@@ -191,7 +191,7 @@ $a,r>0$に対して
 で表される曲線を\textbf{常螺旋}(の特別な場合)といいます。
 $\gamma$は
 \[
-  |\gamma'(t)|=|(-r\sin(t),r\cos(t),a)|=\sqrt{r^2+a^2}\neq0
+  \left|\frac{d\gamma(t)}{dt}\right|=|(-r\sin(t),r\cos(t),a)|=\sqrt{r^2+a^2}\neq0
 \]
 なので、弧長パラメータ付け可能であり、その弧長パラメータは
 \[
@@ -200,18 +200,18 @@ $\gamma$は
 となります。
 ゆえに$\gamma$の弧長パラメータ表示は
 \[
-  \gamma(s)=\left(r\cos\left(\frac{s}{\sqrt{r^2+a^2}}\right),r\sin\left(\frac{s}{\sqrt{r^2+a^2}}\right),\frac{as}{\sqrt{r^2+a^2}}\right)
+  \gamma(t(s))=\left(r\cos\left(\frac{s}{\sqrt{r^2+a^2}}\right),r\sin\left(\frac{s}{\sqrt{r^2+a^2}}\right),\frac{as}{\sqrt{r^2+a^2}}\right)
 \]
 となります。
 
 このとき、単位接ベクトルは
 \[
-  e_1(s)=\frac{d\gamma(s)}{ds}=\frac1{\sqrt{r^2+a^2}}\left(-r\sin\left(\frac{s}{\sqrt{r^2+a^2}}\right),r\cos\left(\frac{s}{\sqrt{r^2+a^2}}\right),a\right)
+  e_1(s)=\frac{d\gamma(t(s))}{ds}=\frac1{\sqrt{r^2+a^2}}\left(-r\sin\left(\frac{s}{\sqrt{r^2+a^2}}\right),r\cos\left(\frac{s}{\sqrt{r^2+a^2}}\right),a\right)
 \]
 と求まります。
 また、$e_2$を求めるために$\gamma$の二階微分を求めると
 \[
-  \frac{d^2\gamma(s)}{ds^2}=-\frac1{r^2+a^2}\left(r\cos\left(\frac{s}{\sqrt{r^2+a^2}}\right),r\sin\left(\frac{s}{\sqrt{r^2+a^2}}\right),0\right)
+  \frac{d^2\gamma(t(s))}{ds^2}=-\frac1{r^2+a^2}\left(r\cos\left(\frac{s}{\sqrt{r^2+a^2}}\right),r\sin\left(\frac{s}{\sqrt{r^2+a^2}}\right),0\right)
 \]
 なので、これの規格化は非常に簡単で
 \[
@@ -225,7 +225,7 @@ $\gamma$は
 
 曲率は
 \[
-  \kappa(s)=\left|\frac{d^2\gamma(s)}{ds^2}\right|=\frac{r}{r^2+a^2}
+  \kappa(s)=\left|\frac{d^2\gamma(t(s))}{ds^2}\right|=\frac{r}{r^2+a^2}
 \]
 となります。
 
@@ -240,7 +240,7 @@ $\gamma$は
 \]
 を考えます。これは
 \[
-  \gamma'(t)=(1,2t,0)
+  \frac{d\gamma(t)}{dt}=(1,2t,0)
 \]
 なので、弧長パラメータづけ可能です。
 この弧長パラメータを求めていくと、
@@ -258,12 +258,28 @@ $\gamma$は
 
 まず単位接ベクトルを求めると
 \[
-  e_1(s)=\frac{d\gamma(s)}{ds}=\frac{d\gamma(t)}{dt}\frac{dt}{ds}=\frac1{ds/dt}\frac{d\gamma(t)}{dt}=\frac1{\sqrt{1+4t^2}}(1,2t,0)
+  e_1(s)=\frac{d\gamma(t(s))}{ds}=\frac{d\gamma(t)}{dt}\frac{dt}{ds}=\frac1{ds/dt}\frac{d\gamma(t)}{dt}=\frac1{\sqrt{1+4t^2}}(1,2t,0)
 \]
 また、二階微分を求めると
 \begin{align*}
-  \frac{d^2\gamma(s)}{ds^2}&=\frac{d}{ds}e_1(s)\\
+  \frac{d^2\gamma(t(s))}{ds^2}&=\frac{d}{ds}e_1(s)\\
   &=\frac1{ds/dt}\frac{d}{dt}\frac1{\sqrt{1+4t^2}}(1,2t,0)\\
   &=\frac1{\sqrt{1+4t^2}}\left\{-\frac{4t}{(1+4t^2)^{3/2}}(1,2t,0)+\frac1{\sqrt{1+4t^2}}(0,2,0)\right\}\\
   &=\frac1{(1+4t^2)^2}(-4t,2,0)
 \end{align*}
+これを規格化したものが$e_2$なので、
+\[
+  e_2(s)=\frac{1}{\sqrt{1+4t^2}}(-2t,1,0)
+\]
+になります。
+あとは簡単な計算によって
+\[
+  e_3(s)=e_1(s)\times e_2(s)=(0,0,1)
+\]
+がわかります。
+
+曲率は
+\[
+  \kappa(s)=\frac{2}{(1+4t^2)^{3/2}}
+\]
+になります。
