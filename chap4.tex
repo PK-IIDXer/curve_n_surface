@@ -1,4 +1,4 @@
-\chapter{曲線のねじれ具合}
+\chapter{曲線の捩率}
 
 これまでいくつかの曲線を見てきました。
 曲線の曲がり具合としての「曲率」をうまく定義できました。
@@ -42,39 +42,134 @@
 つまり、$d\gamma(t(s))/ds$と$d^2\gamma(t(s))/ds^2$が張る平面である\textbf{接触平面}(定義\ref{definition:tangent_plane}を参照)から離れていく方向の"力"が加わるわけです。
 この感覚が人間に「ねじれていない」と思わしめるようです。
 
+\subsection{$e_1,e_2,e_3$を微分する}
+
+従法線ベクトルが定値かどうかを測るものは、とりもなおさずその微分です。
+実は$e_3(s)$の微分は結構おもしろいことになっています。
+まず外積の微分公式から
+\[
+  \frac{de_3(s)}{ds}=\frac{de_1(s)}{ds}\times e_2(s)+e_1(s)\times\frac{de_2(s)}{ds}
+\]
+です。
+$e_1(s)$の微分はもうby definition。曲率と主法線ベクトルの定義でもうわかりますね。
+\[
+  \frac{de_1(s)}{ds}=\frac{d^2\gamma(t(s))}{ds^2}=\kappa(s)e_2(s)
+\]
+です。
+
+次に$e_2(s)$の微分を求めなければいけないですが、こちらは厄介です。
+なのでズルっぽいですが、$e_1(s),e_2(s),e_3(s)$が正規直交基底を張っていることを使います。
+つまり、
+\[
+  \frac{de_2(s)}{ds}=a(s)e_1(s)+b(s)e_2(s)+c(s)e_3(s)
+\]
+とおきます。
+このとき、まず$e_1(s)$を内積すると、
+\[
+  a(s)=e_1(s)\cdot\frac{de_2(s)}{ds}=\frac{d}{ds}(e_1(s)\cdot e_2(s))-\frac{de_1(s)}{ds}\cdot e_2(s)=-\kappa(s)e_2(s)\cdot e_2(s)=-\kappa(s)
+\]
+なので、$a(s)$は求まりました。
+次に$e_2(s)$を内積すると、
+\[
+  b(s)=e_2(s)\cdot\frac{de_2(s)}{ds}=\frac12\frac{d|e_2(s)|^2}{ds}=\frac12\frac{d1}{ds}=0
+\]
+となり、$b(s)$も求まりました。
+いきおい$e_3(s)$を内積して
+\[
+  c(s)=e_3(s)\cdot\frac{de_2(s)}{ds}
+\]
+ではありますが、これはこれ以上簡単にはできません。
+
+いったん$c(s)$を求めるのはおいておいて、本丸の$e_3(s)$の微分を求めに行くと、
+\begin{align*}
+  \frac{de_3(s)}{ds}&=\frac{de_1(s)}{ds}\times e_2(s)+e_1(s)\times\frac{de_2(s)}{ds}\\
+  &=\kappa(s)e_2(s)\times e_2(s)+e_1(s)\times(-\kappa(s)e_1(s)+c(s)e_3(s))\\
+  &=c(s)e_1(s)\times e_3(s)\\
+  &=c(s)e_1(s)\times(e_1(s)\times e_2(s))\\
+  &=c(s)\{(e_1(s)\cdot e_2(s))e_1(s)-(e_1(s)\cdot e_1(s))e_2(s)\}\\
+  &=-c(s)e_2(s)
+\end{align*}
+となります。
+曲線のねじれぐあいといえる$de_3(s)/ds$は、$e_2(s)$の方向を向いていて、しかもその大きさは
+\[
+  c(s):=e_3(s)\cdot\frac{de_2(s)}{ds}
+\]
+(のマイナス倍)に比例します。
+以上を踏まえた上で、定義のきれいさを重視して、捩率を次のように定義します。
+
 \begin{definition}
   $I$を区間、$(I,\gamma)$を弧長パラメータづけ可能な曲線、$s=s(t)$をその弧長パラメータとする。
-  さらに
-  \[
-    \frac{d^2\gamma(t(s))}{ds^2}\neq0\quad({}^\forall s\in s^{-1}(I))
-  \]
-  を満たすとする。
+  また$\gamma$は三階微分可能であり、かつ曲率$\kappa(s)$は0にならないとする。
   このとき、
   \[
-    \tau(s):=\left|\frac{de_3(s)}{ds}\right|
+    \tau(s):=e_3(s)\cdot\frac{de_2(s)}{ds}
   \]
   を、曲線$(I,\gamma)$の\textbf{捩率}という。
 \end{definition}
 
 
 
-\section{例題：円、放物線、螺旋の曲率}
+\section{例題：円、放物線、螺旋の捩率}
 
 円や放物線の従法線ベクトル$e_3$は定値だったので、それぞれ
 \[
-  \tau(s)=\left|\frac{de_3(s)}{ds}\right|=0
+  \frac{de_3(s)}{ds}=0=-\tau(s)e_2(s)
 \]
-となり、ねじれていないと言えます。
+であり、$e_2(s)\neq0$だったので$\tau(s)=0$とならざるを得ないです。
+つまり、ねじれていないと言えます。
 
 一方、常螺旋の場合
 \begin{align*}
-  &\frac{de_3(s)}{ds}\\
-  =&\frac{d}{ds}\frac{1}{\sqrt{r^2+a^2}}(a\sin(s/\sqrt{r^2+a^2}),-a\cos(s/\sqrt{r^2+a^2}),r)\\
-  =&\frac{1}{r^2+a^2}
+  \frac{de_3(s)}{ds}=&\frac{d}{ds}\frac{1}{\sqrt{r^2+a^2}}(a\sin(s/\sqrt{r^2+a^2}),-a\cos(s/\sqrt{r^2+a^2}),r)\\
+  =&\frac{a}{r^2+a^2}(\cos(s/\sqrt{r^2+a^2}),\sin(s/\sqrt{r^2+a^2}),0)\\
+  e_2(s)=&-(\cos(s/\sqrt{r^2+a^2}),\sin(s/\sqrt{r^2+a^2}),0)
 \end{align*}
 ゆえに捩率は
 \[
-  \kappa(s)=\frac{1}{r^2+a^2}
+  \kappa(s)=\frac{a}{r^2+a^2}
 \]
 となります。
-だいぶねじれてますね。
+ちょっとねじれてますね。
+
+\subsection{ちょっと複雑な例}
+
+\[
+  \gamma(t)=(t,t^2,t^3)
+\]
+という曲線を考えます。
+$\gamma$の弧長パラメータは
+\[
+  s(t)=\int_0^t\sqrt{1+4t^2+9t^4}dt
+\]
+なんですが、これは簡単には求められないのでおいておきます。
+単位接ベクトル、主法線ベクトル、従法線ベクトル、曲率、捩率を求めると、
+\[
+  e_1(s)=\frac{d\gamma(t(s))}{ds}=\frac{1}{ds/dt}\frac{d\gamma(t)}{dt}=\frac{1}{\sqrt{1+4t^2+9t^4}}(1,2t,3t^2)
+\]
+\begin{align*}
+  \frac{d^2\gamma(t(s))}{ds^2}&=\frac{d}{ds}\frac{d\gamma(t(s))}{ds}=\frac{1}{ds/dt}\frac{d}{dt}\frac{1}{\sqrt{1+4t^2+9t^4}}(1,2t,3t^2)\\
+  &=\frac1{(1+4t^2+9t^4)^2}(-18t^3-4t,-18t^4+2,12t^3+6t)
+\end{align*}
+どう考えても計算大変すぎるので、ここからはwolfram大先輩に一瞬で計算してもらいましょう。
+\[
+  \kappa(s)=\left|\frac{d^2\gamma(t(s))}{ds^2}\right|=\frac{2\sqrt{9t^4+9t^2+1}}{(1+4t^2+9t^4)^{3/2}}
+\]
+\[
+  e_2(s)=\frac{1}{\sqrt{(1+4t^2+9t^4)(9t^4+9t^2+1)}}(-9t^3-2t,-9t^4+1,6t^3+3t)
+\]
+\[
+  e_3(s)=\frac{1}{\sqrt{9t^4+9t^2+1}}(3t^2,-3t,1)
+\]
+捩率を定義通り求めるには$e_2$の微分を求めなければいけないのですが、この$e_2$なんて絶対微分したくないでござるので、ちょっと裏技つかいます。
+\[
+  \frac{de_3(s)}{ds}=-\tau(s)e_2(s)\quad\therefore\;\left|\frac{de_3(s)}{ds}\right|=|\tau(s)|
+\]
+なので$\tau$の絶対値なら簡単に求めることができるのです。
+\[
+  \frac{de_3(s)}{ds}=\frac{1}{ds/dt}\frac{de_3(s)}{dt}=\frac{(3t(9t^2+2),3(9t^4-1),-9t(2t^2+1))}{\sqrt{(1+4t^2+9t^4)(9t^4+9t^2+1)^3}}
+\]
+これの絶対値が
+\[
+  \tau(s)=\frac3{9t^4+9t^2+1}
+\]
+になるそうです。計算ミスってなければめっちゃきれいになったな。
