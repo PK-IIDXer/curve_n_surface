@@ -1,0 +1,525 @@
+\chapter{補足}
+
+\section{線形代数}
+
+ここではガロア理論で学んだ程度の線形代数をスタートラインに、曲線論や曲面論で使う程度の線形代数を用意します。
+
+\subsection{前提知識}
+
+以下はガロア理論のときに証明した内容ですので、証明を割愛して述べるにとどめます。
+\begin{definition}[体]
+  $(K,+,\cdot,0,1)$が体であるとは、次を満たす時を言う。
+  \begin{itemize}
+    \item \textbf{演算の存在}: 写像$+:K\times K\to K$と$\cdot:K\times K\to K$が定められている。
+      $+$を$K$の加法、$\cdot$を$K$の乗法と呼ぶ。
+    \item \textbf{加法に関して可換群をなす}
+    \begin{itemize}
+      \item \textbf{結合法則} $a+(b+c)=(a+b)+c$ (${}^\forall a,b,c\in K$)
+      \item \textbf{単位元の存在} $a+0=0+a=a$ (${}^\forall a\in K$)
+      \item \textbf{逆元の存在} ${}^\forall a\in K$に対して、${}^\exists -a\in K$ s.t. $a+(-a)=(-a)+a=0$
+      \item \textbf{可換性} $a+b=b+a$ (${}^\forall a,b\in K$)
+    \end{itemize}
+    \item \textbf{乗法に関して可換モノイドをなす}
+    \begin{itemize}
+      \item \textbf{結合法則} $a(bc)=(ab)c$ (${}^\forall a,b,c\in K$)
+      \item \textbf{単位元の存在} $a\cdot1=1\cdot a=a$ (${}^\forall a\in K$)
+      \item \textbf{可換性} $ab=ba$ (${}^\forall a,b\in K$)
+    \end{itemize}
+    \item \textbf{分配法則を満たす} $a(b+c)=ab+ac$ (${}^\forall a,b,c\in K$)
+    \item \textbf{0以外の元は乗法に関して逆元をもつ} ${}^\forall a\in K\setminus\{0\}$に対して、${}^\exists a^{-1}\in K$ s.t. $aa^{-1}=a^{-1}a=1$
+  \end{itemize}
+\end{definition}
+\begin{definition}[ベクトル空間]
+  可換群$V$が体$K$上のベクトル空間である(以下$K$ベクトル空間)とは、スカラー倍
+  \[
+    K\times V\to V
+  \]
+  が定義されていて、次を満たす時を言う。
+  \begin{itemize}
+    \item \textbf{結合法則} $(ab)v=a(bv)$ (${}^\forall a,b\in K, v\in V$)
+    \item \textbf{スカラーに関する分配法則} $(a+b)v=av+bv$ (${}^\forall a,b\in K, v\in V$)
+    \item \textbf{ベクトルに関する分配法則} $a(v+w)=av+aw$ (${}^\forall a\in K, v,w\in V$)
+    \item $1\cdot v=v$ ($\forall v\in V$)
+  \end{itemize}
+\end{definition}
+\begin{definition}[部分空間]
+  $V$を$K$ベクトル空間、$W\subset V$とする。
+  $W$が$V$の部分空間であるとは、次を満たす時を言う。
+  \begin{itemize}
+    \item \textbf{零元の存在} $0\in W$
+    \item \textbf{加法に関して閉じている} $v,w\in W\implies v+w\in W$
+    \item \textbf{スカラー倍に関して閉じている} $a\in K, v\in W\implies av\in W$
+  \end{itemize}
+\end{definition}
+\begin{definition}[商空間]
+  $V$を$K$ベクトル空間、$W\subset V$を部分空間とする。
+  $W$の剰余類全体の集合
+  \[
+    V/W:=\{v+W\mid v\in V\}
+  \]
+  を$V$の$W$による商空間という。
+\end{definition}
+\begin{definition}[一次独立]
+  $K$ベクトル空間の空でない部分集合$B\subset K$が一次独立であるとは、次を満たす時を言う。
+  \begin{align*}
+    {}^\forall e_1,\dots,e_n\in B: \text{有限部分集合,} {}^\forall a_1,\dots,a_n\in K, \left[\sum_{i=1}^na_ie_i=0\implies a_1=\cdots=a_n=0\right]
+  \end{align*}
+\end{definition}
+\begin{definition}[生成系]
+  $K$ベクトル空間の空でない部分集合$B\subset K$が$V$の生成系であるとは、次を満たす時を言う。
+  \begin{align*}
+    {}^\forall v\in V, {}^\exists e_1,\dots,e_n\in B: \text{有限部分集合}, {}^\exists a_1,\dots,a_n\in K s.t. \left[v=\sum_{i=1}^na_ie_i\right]
+  \end{align*}
+\end{definition}
+\begin{definition}[基底]
+  $K$ベクトル空間$V$の空でない部分集合$B\subset K$が$V$の基底であるとは、$B$が一次独立かつ生成系であるときをいう。
+  有限個の基底を選択できるとき、ベクトル空間$V$は有限次元であるといい、その基底の個数を$\dim_K(V)$で表す。
+  有限次元ではないベクトル空間を無限次元ベクトル空間といい、$\dim_K(V)=+\infty$と書き表す。
+  $V$が有限次元で、$B=\{e_1,\dots,e_n\}$のとき、$e_1,\dots,e_n$が基底であることを
+  \[
+    V=\left<e_1,\dots,e_n\right>_K
+  \]
+  で表す。
+\end{definition}
+\begin{theorem}[基底の存在と濃度の一意性]
+  任意の$K$ベクトル空間は基底をもち、その濃度は基底の取り方によらず一定である。
+\end{theorem}
+\begin{definition}[線形写像]
+  $V,W$を$K$ベクトル空間とする。
+  群準同型写像$f:V\to W$が$K$線形写像であるとは、
+  \[
+    f(av)=af(v),\quad{}^\forall a\in K, v\in V
+  \]
+  を満たす時を言う。
+  $f^{-1}:W\to V$が存在するとき、$f$は同型写像であるといい、$V$と$W$は互いに同型であるという。
+\end{definition}
+\begin{theorem}[線形写像の準同型定理]
+  $V,W$を$K$ベクトル空間、$f:V\to W$を$K$線形写像とする。
+  このとき、次の写像は同型写像である。
+  \[
+    V/{\rm Ker}(f)\to{\rm Im}(f);v+{\rm Ker}(f)\mapsto f(v)
+  \]
+\end{theorem}
+\begin{theorem}
+  $V,W$を$K$ベクトル空間、$f:V\to W$を$K$線形写像とする。
+  このとき、$f$が同型写像であることと、$f$が単射かつ、$V$と$W$の次元がそれぞれ等しいことは同値である。
+  特に、$V$と$W$が互いに同型であることと、それぞれの基底の濃度が等しいことは同値である。
+\end{theorem}
+\begin{theorem}[線形写像の行列表示]
+  $V,W$を有限次元$K$ベクトル空間、$f:V\to W$を線形写像、
+  \begin{align*}
+    B_V&=\{e_1,\dots,e_m\}\\
+    B_W&=\{e'_1,\dots,e'_n\}
+  \end{align*}
+  をそれぞれ$V,W$の基底とする。
+  このとき、
+  \[
+    f(e_i)=\sum_{j=1}^ma_{ij}e'_j
+  \]
+  とおくことができる。このとき線形写像$f$は、行列表示
+  \begin{align*}
+    f(e_1,e_2,\dots,e_m)=(e'_1,e'_2,\dots,e'_n)\begin{pmatrix}
+      a_{11} & a_{12} & \cdots & a_{1m}\\
+      a_{21} & a_{22} & \cdots & a_{2m}\\
+      \vdots & \vdots & \ddots & \vdots\\
+      a_{n1} & a_{n2} & \cdots & a_{nm}\\
+    \end{pmatrix}
+  \end{align*}
+  で特徴づけられる。
+  行列
+  \[
+    \begin{pmatrix}
+      a_{11} & a_{12} & \cdots & a_{1m}\\
+      a_{21} & a_{22} & \cdots & a_{2m}\\
+      \vdots & \vdots & \ddots & \vdots\\
+      a_{n1} & a_{n2} & \cdots & a_{nm}\\
+    \end{pmatrix}
+  \]
+  を、線形写像$f$の表現行列という。
+\end{theorem}
+\begin{theorem}
+  $V_1,V_2,V_3$を$K$ベクトル空間、$f_1:V_1\to V_2$および$f_2:V_2\to V_3$を$K$線形写像とする。
+  このとき$f_2\circ f_1:V_1\to V_3$はまた$K$線形写像である。
+  $\dim_K(V_1)=l<+\infty$、$\dim_K(V_2)=m<+\infty$、$\dim_K(V_3)=n<+\infty$のとき、それぞれのある基底をとり、$f_1$と$f_2$の表現行列をそれぞれ
+  \[
+    \begin{pmatrix}
+      a_{11} & a_{12} & \cdots & a_{1l}\\
+      a_{21} & a_{22} & \cdots & a_{2l}\\
+      \vdots & \vdots & \ddots & \vdots\\
+      a_{m1} & a_{m2} & \cdots & a_{ml}\\
+    \end{pmatrix},\quad
+    \begin{pmatrix}
+      b_{11} & b_{12} & \cdots & b_{1m}\\
+      b_{21} & b_{22} & \cdots & b_{2m}\\
+      \vdots & \vdots & \ddots & \vdots\\
+      b_{n1} & b_{n2} & \cdots & b_{nm}\\
+    \end{pmatrix}
+  \]
+  とする。このとき、$f_2\circ f_1$の表現行列は、行列の積
+  \[
+    \begin{pmatrix}
+      b_{11} & b_{12} & \cdots & b_{1m}\\
+      b_{21} & b_{22} & \cdots & b_{2m}\\
+      \vdots & \vdots & \ddots & \vdots\\
+      b_{n1} & b_{n2} & \cdots & b_{nm}\\
+    \end{pmatrix}
+    \begin{pmatrix}
+      a_{11} & a_{12} & \cdots & a_{1l}\\
+      a_{21} & a_{22} & \cdots & a_{2l}\\
+      \vdots & \vdots & \ddots & \vdots\\
+      a_{m1} & a_{m2} & \cdots & a_{ml}\\
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+      \sum_kb_{1k}a_{k1} & \sum_kb_{1k}a_{k2} & \cdots & \sum_kb_{1k}a_{kl}\\
+      \sum_kb_{2k}a_{k1} & \sum_kb_{2k}a_{k2} & \cdots & \sum_kb_{2k}a_{kl}\\
+      \vdots & \vdots & \ddots & \vdots\\
+      \sum_kb_{nk}a_{k1} & \sum_kb_{nk}a_{k2} & \cdots & \sum_kb_{nk}a_{kl}\\
+    \end{pmatrix}
+  \]
+  で表現される。
+\end{theorem}
+
+\subsection{連立一次方程式と行列式}
+
+行列は連立一次方程式を解くのに便利です。
+$V,W$を$K$有限次元ベクトル空間とし、$f:V\to W$を線形写像とします。
+今回は
+\[
+  f(x)=c
+\]
+という方程式を考えましょう。
+$\dim_K(V)=m$、$\dim_K(W)=n$、$V=\left<e_1,\dots,e_m\right>_K$、$W=\left<e'_1,\dots,e'_m\right>_K$とすると、$f$の表現行列を
+\[
+  \begin{pmatrix}
+    a_{11} & a_{12} & \cdots & a_{1m}\\
+    a_{21} & a_{22} & \cdots & a_{2m}\\
+    \vdots & \vdots & \ddots & \vdots\\
+    a_{n1} & a_{n2} & \cdots & a_{nm}\\
+  \end{pmatrix}
+\]
+とおくことができます。
+また、
+\[
+  x=\sum_{i=1}^mx_ie_i,\quad c=\sum_{j=1}^nc_je'_j
+\]
+とすると、方程式$f(x)=c$は次のように書き直すことができます。
+\begin{align*}
+  f\left(\sum_{i=1}^mx_ie_i\right)=c
+  \iff&f(e_1,\dots,e_m)\begin{pmatrix}
+    x_1\\\vdots\\x_m
+  \end{pmatrix}=c\\
+  \iff&(e'_1,\dots,e'_n)\begin{pmatrix}
+    a_{11} & a_{12} & \cdots & a_{1m}\\
+    a_{21} & a_{22} & \cdots & a_{2m}\\
+    \vdots & \vdots & \ddots & \vdots\\
+    a_{n1} & a_{n2} & \cdots & a_{nm}\\
+  \end{pmatrix}
+  \begin{pmatrix}
+    x_1\\x_2\\\vdots\\x_m
+  \end{pmatrix}=c\\
+  \iff&\begin{pmatrix}
+    a_{11} & a_{12} & \cdots & a_{1m}\\
+    a_{21} & a_{22} & \cdots & a_{2m}\\
+    \vdots & \vdots & \ddots & \vdots\\
+    a_{n1} & a_{n2} & \cdots & a_{nm}\\
+  \end{pmatrix}
+  \begin{pmatrix}
+    x_1\\x_2\\\vdots\\x_m
+  \end{pmatrix}=
+  \begin{pmatrix}
+    c_1\\c_2\\\vdots\\c_n
+  \end{pmatrix}
+\end{align*}
+ゆえに方程式$f(x)=c$は
+\begin{align*}
+  \begin{cases}
+    a_{11}x_1+a_{12}x_2+\cdots+a_{1m}x_m=c_1\\
+    a_{21}x_1+a_{22}x_2+\cdots+a_{2m}x_m=c_2\\
+    \quad\vdots\\
+    a_{n1}x_1+a_{n2}x_2+\cdots+a_{nm}x_m=c_n\\
+  \end{cases}
+\end{align*}
+と同値です。
+みごとに中学生以来慣れ親しんだ連立一次方程式になりました。
+
+連立一次方程式を解くための方法の一つに、\textbf{加減法}があります。
+例えば$a_{11}\neq0$のとき、第二式から第一式$\times a_{11}^{-1}a_{21}$を引いて
+\[
+  (a_{22}-a_{11}^{-1}a_{21}a_{12})x_2+(a_{23}-a_{11}^{-1}a_{21}a_{13})x_3+\cdots+(a_{2m}-a_{11}^{-1}a_{21}a_{1m})x_m=c_2-a_{11}^{-1}a_{21}c_1
+\]
+という$x_1$が消えた方程式が現れます。
+第三式以降も同様で、最終的に$x_1$が残るのは第一式のみになります。
+そうすると第二式以降で$x_2$の係数が生き残っているやつを選んで、$x_2$が残っている方程式が一つだけになるようにできます。
+これを繰り返して$x_i$を確定していくのです。
+これを一般化すると、次のような手続きになります。
+\begin{definition}
+  $n$を整数、$1\leq i<j\leq n$とする。
+  $\alpha\delta-\beta\gamma\neq0$とする。
+  このとき$n$次正方行列\footnote{行数と列数が等しい行列}
+  \[
+    E_{ij}(\alpha, \beta, \gamma, \delta) :=
+    \bordermatrix{
+             & (1)    &   & (i)    &   & (j)    &   & (n)    \cr
+        (1)  & 1      & \dots  & 0      & \dots  & 0      & \dots  & 0      \cr
+         & \vdots & \ddots & \vdots &        & \vdots &        & \vdots \cr
+        (i)  & 0      & \dots  & \alpha & \dots  & \beta  & \dots  & 0      \cr
+         & \vdots &        & \vdots & \ddots & \vdots &        & \vdots \cr
+        (j)  & 0      & \dots  & \gamma & \dots  & \delta & \dots  & 0      \cr
+         & \vdots &        & \vdots &        & \vdots & \ddots & \vdots \cr
+        (n)  & 0      & \dots  & 0      & \dots  & 0      & \dots  & 1      \cr
+    }
+  \]
+  を$n$次\textbf{基本行列}と呼ぶ。
+\end{definition}
+\begin{example}
+  $n$次正方行列$A$に対して基本行列を左からかける操作は、次の操作と同じになる。
+  \begin{itemize}
+    \item $E_{ij}(\alpha,0,0,1)$は$i$行を$\alpha$倍する。
+    \item $E_{ij}(0,1,1,0)$は、$i$行と$j$行を交換する。
+    \item $E_{ij}(1,\beta,0,1)$は、$i$行に$j$行の$\beta$倍を掛けたものを足す。
+  \end{itemize}
+\end{example}
+このように基本行列を左からかけていって、いつか$x_i$イコールの式に持っていくということを、高校までの知識でやっていたのです。
+実はすごいことをしていたので、定理としてまとめておきましょう。
+\begin{theorem}
+  任意の$n$次正方行列$A$は、いくつかの基本行列を左からかけることで単位行列\footnote{対角線上に1だけが並び、それ以外は0の正方行列}にすることができる。
+  (右から掛けても同様)
+\end{theorem}
+
+そんなことをせずとも、世の中にはこの方程式の解の公式が存在します。
+例えば$V,W$がともに2次元のとき、方程式$f(x)=c$は2元連立方程式
+\[
+  \begin{pmatrix}
+    a_{11} & a_{12} \\
+    a_{21} & a_{22}
+  \end{pmatrix}
+  \begin{pmatrix}
+    x_1 \\ x_2
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+    c_1 \\ c_2
+  \end{pmatrix}
+\]
+になります。
+高校時代に行列が数学Cの単元にあった世代の方は、この解が
+\[
+  \begin{pmatrix}
+    x_1 \\ x_2
+  \end{pmatrix}
+  =
+  \frac{1}{a_{11}a_{22}-a_{12}a_{21}}
+  \begin{pmatrix}
+    a_{22} & -a_{12} \\
+    -a_{21} & a_{11}
+  \end{pmatrix}
+  \begin{pmatrix}
+    c_1 \\ c_2
+  \end{pmatrix}
+\]
+であることをご存じでしょう。
+実際、
+\[
+  \begin{pmatrix}
+    a_{11} & a_{12} \\
+    a_{21} & a_{22}
+  \end{pmatrix}
+  \begin{pmatrix}
+    a_{22} & -a_{12} \\
+    -a_{21} & a_{11}
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+    a_{11}a_{22}-a_{12}a_{21} & 0 \\
+    0 & a_{11}a_{22}-a_{12}a_{21}
+  \end{pmatrix}
+\]
+になることは、計算で簡単にわかります。
+ところがこの公式は
+\[
+  a_{11}a_{22}-a_{12}a_{21}\neq0
+\]
+でないと通用しません。
+
+3次の場合、連立方程式は
+\[
+  \begin{pmatrix}
+    a_{11} & a_{12} & a_{13} \\
+    a_{21} & a_{22} & a_{23} \\
+    a_{31} & a_{32} & a_{33}
+  \end{pmatrix}
+  \begin{pmatrix}
+    x_1 \\ x_2 \\ x_3
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+    c_1 \\ c_2 \\ c_3
+  \end{pmatrix}
+\]
+になりますが、この解の公式は
+\[
+  D:=a_{11}a_{22}a_{33}+a_{12}a_{23}a_{31}+a_{13}a_{21}a_{32}-a_{31}a_{22}a_{31}-a_{12}a_{21}a_{33}-a_{11}a_{23}a_{32}\neq0
+\]
+とおくと、
+\[
+  \begin{pmatrix}
+    x_1 \\ x_2 \\ x_3
+  \end{pmatrix}
+  =
+  \frac1D
+  \begin{pmatrix}
+    a_{22}a_{33}-a_{23}a_{32} & -a_{12}a_{33}+a_{13}a_{32} & a_{12}a_{23}-a_{13}a_{22} \\
+    -a_{21}a_{33}+a_{23}a_{31} & a_{11}a_{33}-a_{13}a_{31} & -a_{11}a_{23}+a_{13}a_{21} \\
+    a_{21}a_{32}-a_{22}a_{31} & -a_{11}a_{32}+a_{12}a_{31} & a_{11}a_{22}-a_{12}a_{21}
+  \end{pmatrix}
+  \begin{pmatrix}
+    c_1 \\ c_2 \\ c_3
+  \end{pmatrix}
+\]
+が解となります。
+加減法と帰納法による単なる計算問題なので証明は略しますが、一般次元で次の公式が知られています。
+まずは定義から始めます。
+\begin{definition}
+  $n$次正方行列
+  \[
+    A=\begin{pmatrix}
+      a_{11} & a_{12} & \cdots & a_{1n}\\
+      a_{21} & a_{22} & \cdots & a_{2n}\\
+      \vdots & \vdots & \ddots & \vdots\\
+      a_{n1} & a_{n2} & \cdots & a_{nn}\\
+    \end{pmatrix}
+  \]
+  に対して、
+  \[
+    \det(A):=\sum_{\sigma\in S_n}{\rm sign}(\sigma)a_{1\sigma(1)}a_{2\sigma(2)}\cdots a_{n\sigma(n)}\in K
+  \]
+  を、行列$A$の\textbf{行列式}という。
+  ここで$S_n$は$n$次対称群であり、${\rm sign}(\sigma)$は対称群の元$\sigma$の符号である。。
+\end{definition}
+\begin{theorem}
+  $n$次正方行列
+  \[
+    A=\begin{pmatrix}
+      a_{11} & a_{12} & \cdots & a_{1n}\\
+      a_{21} & a_{22} & \cdots & a_{2n}\\
+      \vdots & \vdots & \ddots & \vdots\\
+      a_{n1} & a_{n2} & \cdots & a_{nn}\\
+    \end{pmatrix}
+  \]
+  と$1\leq i,j\leq n$に対して、
+  \[
+    \widetilde{a}_{ji}=(-1)^{i+j}\det\begin{pmatrix}
+      a_{11} & \cdots & a_{1,j-1} & a_{1,j+1} & \cdots & a_{1n}\\
+      \vdots & \ddots & \vdots & \vdots & \ddots & \vdots\\
+      a_{i-1,1} & \cdots & a_{i-1,j-1} & a_{i-1,j+1} & \cdots & a_{i-1,n}\\
+      a_{i+1,1} & \cdots & a_{i+1,j-1} & a_{i+1,j+1} & \cdots & a_{i+1,n}\\
+      \vdots & \ddots & \vdots & \vdots & \ddots & \vdots\\
+      a_{n1} & \cdots & a_{n,j-1} & a_{n,j+1} & \cdots & a_{nn}\\
+    \end{pmatrix}
+  \]
+  として、
+  \[
+    \widetilde{A}=\begin{pmatrix}
+      \widetilde{a}_{11} & \widetilde{a}_{12} & \cdots & \widetilde{a}_{1n}\\
+      \widetilde{a}_{21} & \widetilde{a}_{22} & \cdots & \widetilde{a}_{2n}\\
+      \vdots & \vdots & \ddots & \vdots\\
+      \widetilde{a}_{n1} & \widetilde{a}_{n2} & \cdots & \widetilde{a}_{nn}\\
+    \end{pmatrix}
+  \]
+  とおくと、
+  \[
+    A\widetilde{A}=\widetilde{A}A=\det(A)\begin{pmatrix}
+      1 & 0 & \cdots & 0\\
+      0 & 1 & \cdots & 0\\
+      \vdots & \vdots & \ddots & \vdots\\
+      0 & 0 & \cdots & 1\\
+    \end{pmatrix}
+  \]
+  を満たす。
+\end{theorem}
+上記の行列$\widetilde{A}$は\textbf{余因子行列}といいます。
+上の定理は、$\det(A)\neq0$ならば、余因子行列を使って$A$の逆数…つまり\textbf{逆行列}を作ることができるといっています。
+余因子の計算はコンピュータにプログラムを組めば勝手にやってくれるので、僕は計算は人生で数回しかやってないと思います。
+余因子行列の計算を暗算でやるより、その定義と性質をちゃんと知ってる方が偉いです。
+
+\subsection{正則行列と特殊線形群}
+
+まずは行列式が0になるパターンをいくつか知っておきましょう。
+\begin{example}
+  ある列がすべて0の行列
+  \[
+    A=\begin{pmatrix}
+      a_{11} & a_{12} & \cdots & a_{1n}\\
+      a_{21} & a_{22} & \cdots & a_{2n}\\
+      \vdots & \vdots & \ddots & \vdots\\
+      a_{n1} & a_{n2} & \cdots & a_{nn}\\
+    \end{pmatrix}
+  \]
+  $a_{1j}=a_{2j}=\cdots=a_{nj}=0$ならば$\det(A)=0$。
+
+  実際、行列式の定義式
+  \[
+    \det(A):=\sum_{\sigma\in S_n}{\rm sign}(\sigma)a_{1\sigma(1)}a_{2\sigma(2)}\cdots a_{n\sigma(n)}\in K
+  \]
+  において、$a_{1\sigma(1)}a_{2\sigma(2)}\cdots a_{n\sigma(n)}$のうちどれか一つは0になる。
+  よって$\det(A)=0$。
+\end{example}
+
+\begin{definition}
+  $K$を体、$n>0$を整数とする。
+  $K$係数の$n$次正方行列の集合を$M_n(K)$と書く。
+\end{definition}
+\begin{definition}
+  $K$を体、$n>0$を整数とする。
+  \[
+    {\rm GL}_n(K):=\{A\in M_n(K)\mid\det(A)\neq0\}
+  \]
+  は\textbf{一般線形群}と呼ばれる。
+\end{definition}
+次が成り立ちます。
+\begin{theorem}
+  $K$を体、$n>0$を整数とする。
+  このとき、${\rm GL}_n(K)$は群であり、行列式を返す写像
+  \[
+    \det:{\rm GL}_n(K)\to K^\times
+  \]
+  は群準同型である。
+\end{theorem}
+\begin{proof}
+  ${\rm GL}_n(K)$が群であることは、余因子行列から逆行列を作れることから明らか。
+  $A,B\in M_n(K)$を
+  \[
+    A=\begin{pmatrix}
+      a_{11} & a_{12} & \cdots & a_{1n}\\
+      a_{21} & a_{22} & \cdots & a_{2n}\\
+      \vdots & \vdots & \ddots & \vdots\\
+      a_{n1} & a_{n2} & \cdots & a_{nn}\\
+    \end{pmatrix},\quad
+    B=\begin{pmatrix}
+      b_{11} & b_{12} & \cdots & b_{1n}\\
+      b_{21} & b_{22} & \cdots & b_{2n}\\
+      \vdots & \vdots & \ddots & \vdots\\
+      b_{n1} & b_{n2} & \cdots & b_{nn}\\
+    \end{pmatrix}
+  \]
+  とする。
+  このとき、
+  \[
+    AB=\begin{pmatrix}
+      \sum_ka_{1k}b_{k1} & \sum_ka_{1k}b_{k2} & \cdots & \sum_ka_{1k}b_{kn}\\
+      \sum_ka_{2k}b_{k1} & \sum_ka_{2k}b_{k2} & \cdots & \sum_ka_{2k}b_{kn}\\
+      \vdots & \vdots & \ddots & \vdots\\
+      \sum_ka_{nk}b_{k1} & \sum_ka_{nk}b_{k2} & \cdots & \sum_ka_{nk}b_{kn}\\
+    \end{pmatrix}
+  \]
+  $AB$の$ij$成分を
+  \[
+    c_{ij}:=\sum_{k=1}^na_{ik}b_{kj}
+  \]
+  とおくと、
+  \begin{align*}
+    \det(AB)&=\sum_{\sigma\in S_n}{\rm sign}(\sigma)\prod_{i=1}^nc_{i\sigma(i)}\\
+    &=\sum_{\sigma\in S_n}{\rm sign}(\sigma)\prod_{i=1}^n\sum_{k=1}^na_{ik}b_{k\sigma(i)}
+  \end{align*}
+\end{proof}

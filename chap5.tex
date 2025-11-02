@@ -92,36 +92,41 @@
   が成り立つ。
 \end{theorem}
 
-\section{フレネ・セレの公式を解く}
+\subsection{曲率と捩率の不変性}
 
-「公式」を解くって何？って話ですが、フレネ・セレの公式を見ていると「先に曲率と捩率が与えられているとすれば、これは単なる微分方程式じゃね？」ってことです。
-例えば形式的に
-\begin{align*}
-  E(s)&:=
-  \begin{pmatrix}
-    e_1(s)\\
-    e_2(s)\\
-    e_3(s)
-  \end{pmatrix}\\
-  M(s)&:=
-  \begin{pmatrix}
-    0 & \kappa(s) & 0 \\
-    -\kappa(s) & 0 & \tau(s) \\
-    0 & -\tau(s) & 0
-  \end{pmatrix}\\
-\end{align*}
-とおけば、フレネ・セレの公式は非常に単純に見えるタイプの微分方程式
+曲率と捩率は、曲線$\gamma$から定義された関数ですが、\textbf{互いに合同な曲線の曲率と捩率は一致する}という意味で\textbf{曲線の不変量}といえるものです。
+厳密に述べるなら次のようになります。
+
+\begin{theorem}
+  $(\gamma,I)$と$(\gamma',I')$がともに弧長パラメータづけ可能な$C^3$級曲線であって、それぞれの弧長パラメータ$s\in s(I),s'\in s'(I')$について常に$d^2\gamma(t(s))/ds^2\neq0$、$d^2\gamma'(t'(s'))/ds'^2\neq0$を満たすとする。
+  また、$\kappa(s)$、$\tau(s)$を$(\gamma,I)$の曲率と捩率、$\kappa'(s')$、$\tau'(s')$を$(\gamma',I')$の曲率と捩率とする。
+  さらに、ある開区間$J\subset I$と開区間$J'\subset I'$、および、ある3次直交行列$M$と$p\in\mathbb{R}^3$が存在して、
+  \[
+    \gamma'(J')=M(\gamma(J))+p
+  \]
+  を満たすとする。このとき、ある$s_0\in\mathbb{R}$と$\sigma\in\{\pm1\}$が存在して、任意の$s\in s(J)$に対して、$\sigma s+s_0\in s'(J')$ならば
+  \[
+    \kappa'(\sigma s+s_0)=\kappa(s),\quad\tau'(\sigma s+s_0)=\det(M)\tau(s)
+  \]
+  を満たす。
+\end{theorem}
+
+証明に入る前に、前提ごちゃごちゃしてるので、これを説明しましょう。
+これは二つの曲線が「回転や鏡写し」つまり直交行列$M$を掛ける操作、および「平行移動」つまり$p$を足す操作をすることで移りあうことを意味しています。
 \[
-  \frac{dE(s)}{ds}=M(s)E(s)
+  \gamma'(J')=M(\gamma(J))+p
 \]
-に見えます。
-もし$E(s)$や$M(s)$が単なる関数だったら
-\begin{align*}
-  &\frac{dE(s)}{ds}=M(s)E(s)\\
-  \therefore&\frac{dE}{E}=M(s)ds\\
-  \therefore&\int\frac{dE}{E}=\int M(s)ds\\
-  \therefore&\log(E(s))=\int M(s)ds+C\\
-  \therefore&E(s)=E_0\exp\left(\int M(s)ds\right)
-\end{align*}
-という風に解きたいところです。
-しかし悲しいかな、$E(s)$も$M(s)$も行列ですから、もう少し慎重にやらねばなりません。
+は、ちょっとあいまいな書き方ですが、集合で書けば
+\[
+  \gamma'(J')=\{M\gamma(t)+p\mid t\in J\}
+\]
+を意味しています。
+上記の関係をよく合同といいます。
+\begin{definition}
+  曲線$(\gamma,I)$と$(\gamma',I')$が互いに\textbf{合同}であるとは、
+  ある3次直交行列$M$と$p\in\mathbb{R}^3$が存在して、
+  \[
+    \gamma'(I')=M(\gamma(I))+p
+  \]
+  を満たすときをいう。
+\end{definition}
