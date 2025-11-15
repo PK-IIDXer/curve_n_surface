@@ -95,17 +95,35 @@ $e_1(s)$の微分はもうby definition。曲率と主法線ベクトルの定�
   c(s):=e_3(s)\cdot\frac{de_2(s)}{ds}
 \]
 (のマイナス倍)に比例します。
-以上を踏まえた上で、定義のきれいさを重視して、捩率を次のように定義します。
+以上を踏まえた上で捩率を定義したいのですが、その定義を$\gamma$で完結させたいので、$c(s)$を$\gamma(t(s))$だけで表現しておきましょう。
+まず
+\begin{align*}
+  e_1(s)&:=\frac{d\gamma(t(s))}{ds}\\
+  e_2(s)&:=\frac{1}{\kappa(s)}\frac{d^2\gamma(t(s))}{ds^2}\\
+  e_3(s)&:=e_1(s)\times e_2(s)=\frac{1}{\kappa(s)}\left(\frac{d\gamma(t(s))}{ds}\times\frac{d^2\gamma(t(s))}{ds^2}\right)
+\end{align*}
+また
+\[
+  \frac{de_2(s)}{ds}=\frac{d}{ds}\left(\frac{1}{\kappa(s)}\frac{d^2\gamma(t(s))}{ds^2}\right)=-\frac{1}{\kappa(s)^2}\frac{d\kappa(s)}{ds}\frac{d^2\gamma(t(s))}{ds^2}+\frac{1}{\kappa(s)}\frac{d^3\gamma(t(s))}{ds^3}
+\]
+ゆえに、
+\begin{align*}
+  c(s)&=e_3(s)\cdot\frac{de_2(s)}{ds}\\
+  &=\frac{1}{\kappa(s)}\left(\frac{d\gamma(t(s))}{ds}\times\frac{d^2\gamma(t(s))}{ds^2}\right)\cdot\left(-\frac{1}{\kappa(s)^2}\frac{d\kappa(s)}{ds}\frac{d^2\gamma(t(s))}{ds^2}+\frac{1}{\kappa(s)}\frac{d^3\gamma(t(s))}{ds^3}\right)\\
+  &=\frac{1}{\kappa(s)^2}\left(\frac{d\gamma(t(s))}{ds}\times\frac{d^2\gamma(t(s))}{ds^2}\right)\cdot\frac{d^3\gamma(t(s))}{ds^3}\\
+  &=\frac{\left(\frac{d\gamma(t(s))}{ds}\times\frac{d^2\gamma(t(s))}{ds^2}\right)\cdot\frac{d^3\gamma(t(s))}{ds^3}}{\left|\frac{d^2\gamma(t(s))}{ds^2}\right|^2}
+\end{align*}
 
 \begin{definition}
   $I$を区間、$(I,\gamma)$を弧長パラメータづけ可能な曲線、$s=s(t)$をその弧長パラメータとする。
   また$\gamma$は三階微分可能であり、かつ曲率$\kappa(s)$は0にならないとする。
   このとき、
   \[
-    \tau(s):=e_3(s)\cdot\frac{de_2(s)}{ds}
+    \tau(s):=\frac{\left(\frac{d\gamma(t(s))}{ds}\times\frac{d^2\gamma(t(s))}{ds^2}\right)\cdot\frac{d^3\gamma(t(s))}{ds^3}}{\left|\frac{d^2\gamma(t(s))}{ds^2}\right|^2}
   \]
   を、曲線$(I,\gamma)$の\textbf{捩率}という。
 \end{definition}
+実用的には、$\tau(s)=e_3(s)\cdot de_2(s)/ds$で求める機会のほうが多いと思います。
 
 
 

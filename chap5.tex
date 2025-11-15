@@ -1,4 +1,4 @@
-\chapter{フレネ・セレの公式と応用}
+\chapter{曲線の基本定理}
 
 \section{フレネ・セレの公式}
 
@@ -41,7 +41,7 @@
       e_3(s)
     \end{pmatrix}
   \]
-  を\textbf{フレネ標構造}と呼ぶ。
+  を\textbf{フレネ標構}と呼ぶ。
 \end{definition}
 各$e_i(s)$は$\mathbb{R}^3$の元なので、フレネ標構は3次行列です。
 また
@@ -92,41 +92,310 @@
   が成り立つ。
 \end{theorem}
 
-\subsection{曲率と捩率の不変性}
+\section{曲線の基本定理}
 
-曲率と捩率は、曲線$\gamma$から定義された関数ですが、\textbf{互いに合同な曲線の曲率と捩率は一致する}という意味で\textbf{曲線の不変量}といえるものです。
-厳密に述べるなら次のようになります。
+幾何学の大目標は、\textbf{図形をある基準で分類したい}というものです。
+今回は中学数学以来慣れ親しんでいるであろう「合同」を基準にしてみます。
+何を隠そう曲率と捩率は、\textbf{互いに合同な曲線の曲率と捩率は一致する}のです。
+そのような意味で、曲率と捩率は\textbf{曲線の合同変換に関する不変量}といえるものです。
+合同という分類について、大学数学流にしっかりと定義しましょう。
+\begin{definition}
+  $(\gamma,I)$と$(\gamma',I')$を弧長パラメータづけ可能な曲線とし、$s\in s(I)$および$s'\in s'(I')$をその弧長パラメータとする。
+  $(\gamma,I)$と$(\gamma',I')$が互いに\textbf{合同}であるとは、次を満たす時をいう。
+  \begin{itemize}
+    \item $\sigma\in\{\pm1\}$と$s_0\in s(I)$が存在して、写像$s(I)\to s'(I');s\mapsto \sigma s+s_0$は全単射
+    \item ある3次直交行列$M$と$p\in\mathbb{R}^3$が存在して、
+    \[
+      \gamma'(t(\sigma s+s_0)) = M(\gamma(t(s))) + p
+    \]
+  \end{itemize}
+\end{definition}
 
-\begin{theorem}
-  $(\gamma,I)$と$(\gamma',I')$がともに弧長パラメータづけ可能な$C^3$級曲線であって、それぞれの弧長パラメータ$s\in s(I),s'\in s'(I')$について常に$d^2\gamma(t(s))/ds^2\neq0$、$d^2\gamma'(t'(s'))/ds'^2\neq0$を満たすとする。
-  また、$\kappa(s)$、$\tau(s)$を$(\gamma,I)$の曲率と捩率、$\kappa'(s')$、$\tau'(s')$を$(\gamma',I')$の曲率と捩率とする。
-  さらに、ある開区間$J\subset I$と開区間$J'\subset I'$、および、ある3次直交行列$M$と$p\in\mathbb{R}^3$が存在して、
-  \[
-    \gamma'(J')=M(\gamma(J))+p
-  \]
-  を満たすとする。このとき、ある$s_0\in\mathbb{R}$と$\sigma\in\{\pm1\}$が存在して、任意の$s\in s(J)$に対して、$\sigma s+s_0\in s'(J')$ならば
+今回示したい定理の一つは、一言でいえば\textbf{2つの曲線が合同なら、それらの曲率と捩率は一致する}です。
+これを\textbf{曲線の基本定理}の一部になります。
+まずはPart1として次を示しましょう。
+\begin{theorem}[曲線の基本定理(Part1)]
+  曲線$(\gamma,I)$と$(\gamma',I')$に関して以下の仮定を満たすとする。
+  \begin{itemize}
+    \item ともに弧長パラメータづけ可能な$C^3$級曲線
+    \item それぞれの弧長パラメータ$s\in s(I),s'\in s'(I')$について、常に$\frac{d^2\gamma(t(s))}{ds^2}\neq0$、$\frac{d^2\gamma'(t'(s'))}{ds'^2}\neq0$
+    \item $\kappa(s)$、$\tau(s)$は$(\gamma,I)$の曲率と捩率
+    \item $\kappa'(s')$、$\tau'(s')$は$(\gamma',I')$の曲率と捩率
+  \end{itemize}
+  さらに二つの曲線は互いに合同であるとする。すなわち、
+  \begin{itemize}
+    \item ある開区間$J\subset s(I)$と開区間$J'\subset s'(I')$、および、ある$s_0\in\mathbb{R}と\sigma\in\{\pm1\}$が存在し、\\
+    写像 $J\to J';s\mapsto\sigma s+s_0$は全単射
+    \item ある3次直交行列$M$と$p\in\mathbb{R}^3$が存在して、任意の$s\in J$に対して
+    \[
+      \gamma'(t'(\sigma s+s_0)) = M(\gamma(t(s))) + p
+    \]
+  \end{itemize}
+  このとき、任意の$s\in J$に対して
   \[
     \kappa'(\sigma s+s_0)=\kappa(s),\quad\tau'(\sigma s+s_0)=\det(M)\tau(s)
   \]
   を満たす。
 \end{theorem}
-
-証明に入る前に、前提ごちゃごちゃしてるので、これを説明しましょう。
-これは二つの曲線が「回転や鏡写し」つまり直交行列$M$を掛ける操作、および「平行移動」つまり$p$を足す操作をすることで移りあうことを意味しています。
-\[
-  \gamma'(J')=M(\gamma(J))+p
-\]
-は、ちょっとあいまいな書き方ですが、集合で書けば
-\[
-  \gamma'(J')=\{M\gamma(t)+p\mid t\in J\}
-\]
-を意味しています。
-上記の関係をよく合同といいます。
-\begin{definition}
-  曲線$(\gamma,I)$と$(\gamma',I')$が互いに\textbf{合同}であるとは、
-  ある3次直交行列$M$と$p\in\mathbb{R}^3$が存在して、
+\begin{proof}
+  曲率は$\gamma$の二階微分の長さであったから、
+  与式
   \[
-    \gamma'(I')=M(\gamma(I))+p
+    \gamma'(t'(\sigma s+s_0)) = M(\gamma(t(s))) + p
   \]
-  を満たすときをいう。
-\end{definition}
+  において、両辺の二階微分を行っても、それらは一致することからアプローチする。
+
+  まず左辺の二階微分は、$u=\sigma s+s_0$の変数変換で
+  \begin{align*}
+    \frac{d\gamma'(t'(u))}{ds}&=\frac{du}{ds}\frac{d\gamma'(t'(u))}{du}=\sigma\frac{d\gamma'(t'(u))}{du}\\
+    \frac{d^2\gamma'(t'(u))}{ds^2}&=\frac{du}{ds}\frac{d}{du}\frac{d\gamma'(t'(u))}{du}=\sigma^2\frac{d^2\gamma'(t'(u))}{du^2}=\frac{d^2\gamma'(t'(u))}{du^2}
+  \end{align*}
+  と計算できる。
+  ここで$\sigma\in\{\pm1\}$なので、必ず$\sigma^2=1$であることを使用した。
+  ゆえに
+  \[
+    \frac{d^2\text{(LHS)}}{ds^2}=\left|\frac{d^2\gamma'(t'(u))}{du^2}\right|=\kappa'(u)
+  \]
+
+  一方、与式の右辺を二階微分すると、$M$はただの定値の直交行列ゆえ
+  \begin{align*}
+    \frac{d^2(M\gamma(t(u))+p)}{ds^2}&=M\frac{d^2\gamma(t(s))}{ds^2}
+  \end{align*}
+  となり、
+  \[
+    \left|\frac{d^2\text{(RHS)}}{ds^2}\right|=\left|M\frac{d^2\gamma(t(s))}{ds^2}\right|
+  \]
+  となる。
+  ところが直交行列をかけることは、ベクトルの長さを変えないので、結局は
+  \[
+    \frac{d^2\text{(RHS)}}{ds^2}=\kappa(s)
+  \]
+  以上より、
+  \[
+    \kappa(s)=\kappa'(u)=\kappa'(\sigma s+s_0)
+  \]
+  が従う。
+
+  捩率に関しては、定義式
+  \[
+    \tau(s):=\frac{\left(\frac{d\gamma(t(s))}{ds}\times\frac{d^2\gamma(t(s))}{ds^2}\right)\cdot\frac{d^3\gamma(t(s))}{ds^3}}{\left|\frac{d^2\gamma(t(s))}{ds^2}\right|^2}
+  \]
+  を用いる。
+  すぐにわかることは与式
+  \[
+    \gamma'(t'(\sigma s+s_0)) = M(\gamma(t(s))) + p
+  \]
+  の右辺は、微分しても$M$が掛かるだけである。
+  また、ベクトル三重積の公式から、捩率の定義式の分子は、
+  \[
+    \frac{d\gamma(t(s))}{ds},\frac{d^2\gamma(t(s))}{ds^2},\frac{d^3\gamma(t(s))}{ds^3}
+  \]
+  を並べた行列の行列式である。
+  従って与式の右辺に対して捩率の定義式をあてはめると
+  \[
+    \frac{\left(M\frac{d\gamma(t(s))}{ds}\times M\frac{d^2\gamma(t(s))}{ds^2}\right)\cdot M\frac{d^3\gamma(t(s))}{ds^3}}{\left|M\frac{d^2\gamma(t(s))}{ds^2}\right|^2}=\det(M)\frac{\left(\frac{d\gamma(t(s))}{ds}\times\frac{d^2\gamma(t(s))}{ds^2}\right)\cdot\frac{d^3\gamma(t(s))}{ds^3}}{\left|\frac{d^2\gamma(t(s))}{ds^2}\right|^2}=\det(M)\tau(s)
+  \]
+  となる。
+  また与式の左辺の微分に対しても、$u=\sigma s+s_0$の変数変換によって、微分する変数は変わるけれども、$\sigma$が微分回数分かかるだけである。
+  従って、これも捩率の定義式にあてはめると
+  \[
+    \frac{\left(\frac{d\gamma'(t'(u))}{ds}\times\frac{d^2\gamma'(t'(u))}{ds^2}\right)\cdot\frac{d^3\gamma'(t'(u))}{ds^3}}{\left|\frac{d^2\gamma'(t'(u))}{ds^2}\right|^2}=\frac{\left(\sigma\frac{d\gamma'(t'(u))}{du}\times\sigma^2\frac{d^2\gamma'(t'(u))}{du^2}\right)\cdot\sigma^3\frac{d^3\gamma'(t'(u))}{du^3}}{\left|\sigma^2\frac{d^2\gamma'(t'(u))}{du^2}\right|^2}
+  \]
+  $\sigma\in\{\pm1\}$の偶数乗は必ず1になることに気を付ければ、結局
+  \[
+    \frac{\left(\frac{d\gamma'(t'(u))}{ds}\times\frac{d^2\gamma'(t'(u))}{ds^2}\right)\cdot\frac{d^3\gamma'(t'(u))}{ds^3}}{\left|\frac{d^2\gamma'(t'(u))}{ds^2}\right|^2}=\tau'(u)
+  \]
+  となります。
+  これらの捩率の定義式から得られた関数は、定理の与式から等しくなるべきであるから、結局
+  \[
+    \det(M)\tau(s)=\tau'(u)=\tau'(\sigma s+s_0)
+  \]
+  が確かめられた。
+\end{proof}
+
+合同変換で写りあう曲線が二つあたえられたとき、それらの曲率と捩率がそれぞれ等しいことが確かめられました。
+数学者の性として次に気になることは、その逆、つまり、\textbf{曲率と捩率がそれぞれ等しい曲線が二つ与えられたとき、それらは合同変換で写りあうか？}という問題です。
+これは肯定的に解くことができます。
+\begin{theorem}[曲線の基本定理(Part2)]
+  曲線$(\gamma,I)$と$(\gamma',I')$に関して以下の仮定を満たすとする。
+  \begin{itemize}
+    \item ともに弧長パラメータづけ可能な$C^3$級曲線
+    \item それぞれの弧長パラメータ$s\in s(I),s'\in s'(I')$について、常に$\frac{d^2\gamma(t(s))}{ds^2}\neq0$、$\frac{d^2\gamma'(t'(s'))}{ds'^2}\neq0$
+    \item $\kappa(s)$、$\tau(s)$は$(\gamma,I)$の曲率と捩率
+    \item $\kappa'(s')$、$\tau'(s')$は$(\gamma',I')$の曲率と捩率
+    \item ある開区間$J\subset s(I)$と開区間$J'\subset s'(I')$、および、ある$s_0\in\mathbb{R}と\sigma\in\{\pm1\}$が存在し、\\
+    写像 $J\to J';s\mapsto \sigma s+s_0$は全単射
+  \end{itemize}
+  このとき、もしある定数 $\varepsilon\in\{±1\}$ が存在し、全ての $s\in J$ に対して
+  \[
+    \kappa'(\sigma s+s_0) = \kappa(s) \quad \text{かつ} \quad \tau'(\sigma s+s_0) = \varepsilon \tau(s)
+  \]
+  が成り立つならば、曲線$(\gamma,I)$と$(\gamma',I')$は互いに合同である。
+  すなわち、ある3次直交行列 $M$ とベクトル $p\in\mathbb{R}^3$ が一意に存在して、
+  \[
+    \det(M) = \varepsilon
+  \]
+  かつ、任意の$s\in J$で
+  \[
+    \gamma'(t'(\sigma s+s_0)) = M(\gamma(t(s))) + p
+  \]
+  が成り立つ。
+\end{theorem}
+\begin{proof}
+  $\gamma$および$\gamma'$のフレネ標構をそれぞれ
+  \[
+    \begin{pmatrix}
+      e_1(s)\\
+      e_2(s)\\
+      e_3(s)
+    \end{pmatrix},\quad
+    \begin{pmatrix}
+      e'_1(s)\\
+      e'_2(s)\\
+      e'_3(s)
+    \end{pmatrix}
+  \]
+  とする。
+  曲線の合同変換、およびパラメータの平行移動によって
+  \begin{itemize}
+    \item $s_0\in s(I)\cap s'(I')$
+    \item $\gamma(t(s_0))=\gamma'(t'(s_0))$
+    \item $e_i(s_0)=e'_i(s_0)$ ($i=1,2,3$)
+  \end{itemize}
+  であるとしてよい。
+  このとき、$\gamma(t(s))=\gamma'(t'(s))$ (${}^\forall s\in s(I)\cap s'(I')$)を証明するには、
+  \[
+    \frac{d}{ds}(\gamma(t(s))-\gamma'(t'(s)))=0 \text{ すなわち } e_1(s)-e'_1(s)=0
+  \]
+  を示せばよい($\gamma(t(s_0))=\gamma'(t'(s_0))$ゆえ)。
+  そのためには、$i=1,2,3$に対して
+  \begin{align*}
+    e_i(s)&=(\xi_{i1}(s),\xi_{i2}(s),\xi_{i3}(s))\\
+    e'_i(s)&=(\xi'_{i1}(s),\xi'_{i2}(s),\xi'_{i3}(s))\\
+  \end{align*}
+  とおいたとき、
+  \[
+    \xi_{1j}(s)-\xi'_{1j}(s)=0
+  \]
+  を示せばよい。
+  これを示すためには、$j=1,2,3$に対して、
+  \[
+    (\xi_{1j}(s)-\xi'_{1j}(s))^2+(\xi_{2j}(s)-\xi'_{2j}(s))^2+(\xi_{3j}(s)-\xi'_{3j}(s))^2=0
+  \]
+  を示せばよい。まず展開してみると、
+  \begin{align*}
+    &(\xi_{1j}(s)-\xi'_{1j}(s))^2+(\xi_{2j}(s)-\xi'_{2j}(s))^2+(\xi_{3j}(s)-\xi'_{3j}(s))^2\\
+    =&\xi_{1j}(s)^2+\xi_{2j}(s)^2+\xi_{3j}(s)^2+\xi'_{1j}(s)^2+\xi'_{2j}(s)^2+\xi'_{3j}(s)^2\\
+    &-2(\xi_{1j}(s)\xi'_{1j}(s)+\xi_{2j}(s)\xi'_{2j}(s)+\xi_{3j}(s)\xi'_{3j}(s))
+  \end{align*}
+  となる。
+  ここでフレネ標構が正規直交基底であることを思い出せば、結局
+  \begin{align*}
+    &(\xi_{1j}(s)-\xi'_{1j}(s))^2+(\xi_{2j}(s)-\xi'_{2j}(s))^2+(\xi_{3j}(s)-\xi'_{3j}(s))^2\\
+    =&2-2(\xi_{1j}(s)\xi'_{1j}(s)+\xi_{2j}(s)\xi'_{2j}(s)+\xi_{3j}(s)\xi'_{3j}(s))
+  \end{align*}
+  が成り立つ。
+  ところが$s=s_0$では$e_i(s_0)=e'_i(s_0)$であるとしていたので、再びフレネ標構が正規直交基底であったことから
+  \[
+    \xi_{1j}(s_0)\xi'_{1j}(s_0)+\xi_{2j}(s_0)\xi'_{2j}(s_0)+\xi_{3j}(s_0)\xi'_{3j}(s_0)=1
+  \]
+  となり、
+  \[
+    (\xi_{1j}(s_0)-\xi'_{1j}(s_0))^2+(\xi_{2j}(s_0)-\xi'_{2j}(s_0))^2+(\xi_{3j}(s_0)-\xi'_{3j}(s_0))^2=0
+  \]
+  が従う。
+  ゆえに題意を示すには、
+  \[
+    \frac{d}{ds}(\xi_{1j}(s)\xi'_{1j}(s)+\xi_{2j}(s)\xi'_{2j}(s)+\xi_{3j}(s)\xi'_{3j}(s))=0
+  \]
+  を示せばよい。
+  ところがこれは、フレネ・セレの公式より、
+  \begin{align*}
+    \frac{d(\xi_{1j}(s)\xi'_{1j}(s))}{ds}&=\frac{d\xi_{1j}(s)}{ds}\xi'_{1j}(s)+\xi_{1j}(s)\frac{d\xi'_{1j}(s)}{ds}=\kappa(s)\xi_{2j}(s)\xi'_{1j}(s)+\kappa(s)\xi_{1j}(s)\xi'_{2j}(s)\\
+    \frac{d(\xi_{2j}(s)\xi'_{2j}(s))}{ds}&=\frac{d\xi_{2j}(s)}{ds}\xi'_{2j}(s)+\xi_{2j}(s)\frac{d\xi'_{2j}(s)}{ds}\\
+    &=(-\kappa(s)\xi_{1j}(s)+\tau(s)\xi_{3j}(s))\xi'_{2j}(s)+\xi_{2j}(s)(-\kappa(s)\xi'_{1j}(s)+\tau(s)\xi'_{3j}(s))\\
+    &=-\kappa(s)\xi_{1j}(s)\xi'_{2j}(s)-\kappa(s)\xi_{2j}(s)\xi'_{1j}(s)+\tau(s)\xi_{2j}(s)\xi'_{3j}(s)+\tau(s)\xi_{3j}(s)\xi'_{2j}(s)\\
+    \frac{d(\xi_{3j}(s)\xi'_{3j}(s))}{ds}&=\frac{d\xi_{3j}(s)}{ds}\xi'_{3j}(s)+\xi_{3j}(s)\frac{d\xi'_{3j}(s)}{ds}=-\tau(s)\xi_{2j}(s)\xi'_{3j}(s)-\tau(s)\xi_{3j}(s)\xi'_{2j}(s)
+  \end{align*}
+  となって従う。
+\end{proof}
+
+
+
+\section{曲率と捩率から曲線を作る}
+
+となるとその逆、つまり、曲率と捩率が与えられたときに、それらを曲率・捩率にもつ曲線が唯一存在するということは非自明です。
+実はこれは成り立ちます。
+\begin{theorem}[指定した曲率・捩率をもつ曲線の存在定理]
+  $I$を区間、$\kappa:I\to(0,+\infty)$を$C^1$級関数、$\tau:I\to\mathbb{R}$を連続写像とする。
+  このとき、ある$C^3$級曲線$\gamma:I\to\mathbb{R}^3$が存在して、その曲率と捩率がそれぞれ$\kappa(s)$、$\tau(s)$になる。
+\end{theorem}
+\begin{proof}
+  フレネ・セレの公式
+  \[
+    \frac{d}{ds}
+    \begin{pmatrix}
+      e_1(s)\\
+      e_2(s)\\
+      e_3(s)
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+      0 & \kappa(s) & 0 \\
+      -\kappa(s) & 0 & \tau(s) \\
+      0 & -\tau(s) & 0
+    \end{pmatrix}
+    \begin{pmatrix}
+      e_1(s)\\
+      e_2(s)\\
+      e_3(s)
+    \end{pmatrix}
+  \]
+  を微分方程式とみて、解の存在と一意性定理を使用する。
+  この方程式は線形微分方程式ゆえ、$s_0\in I$と$e_i(s_0)$を適当に決めれば、フレネ・セレの公式を満たすフレネ標構
+  \[
+    \begin{pmatrix}
+      e_1(s)\\
+      e_2(s)\\
+      e_3(s)
+    \end{pmatrix}
+  \]
+  が一意に定まり、これらはもちろん可微分である。
+  このとき、
+  \[
+    \gamma:I\to \mathbb{R}^3;s\mapsto\int_{s_0}^s e_1(s)ds
+  \]
+  とおけば、これは求める曲線である。
+
+  実際、曲率については
+  \begin{align*}
+    \frac{d\gamma(s)}{ds}=\frac{d}{ds}\int_{s_0}^se_1(s)ds=e_1(s)
+  \end{align*}
+  ゆえに
+  \begin{align*}
+    \left|\frac{d^2\gamma(s)}{ds^2}\right|=\left|\frac{de_1(s)}{ds}\right|=\left|\kappa(s)e_2(s)\right|=\kappa(s)
+  \end{align*}
+  となり、確かめられた。
+  また、捩率については
+  \begin{align*}
+    \frac{d\gamma(s)}{ds}&=e_1(s)\\
+    \frac{d^2\gamma(s)}{ds^2}&=\frac{de_1(s)}{ds}=\kappa(s)e_2(s)\\
+    \frac{d^3\gamma(s)}{ds^3}&=\frac{d(\kappa(s)e_2(s))}{ds}=\frac{d\kappa(s)}{ds}e_2(s)+\kappa(s)\frac{de_2(s)}{ds}=-\kappa(s)^2e_1(s)+\frac{d\kappa(s)}{ds}e_2(s)+\kappa(s)\tau(s)e_3(s)\\
+  \end{align*}
+  という計算により(このことから$\gamma$が$C^3$級であることもわかる)、捩率の$\gamma$のみによる定義式の分母にくる関数は
+  \begin{align*}
+    &\left(\frac{d\gamma(s)}{ds}\times\frac{d^2\gamma(s)}{ds^2}\right)\cdot\frac{d^3\gamma(s)}{ds^3}\\
+    =&(e_1(s)\times\kappa(s)e_2(s))\cdot\left(-\kappa(s)^2e_1(s)+\frac{d\kappa(s)}{ds}e_2(s)+\kappa(s)\tau(s)e_3(s)\right)\\
+    =&\kappa(s)e_3\cdot\left(-\kappa(s)^2e_1(s)+\frac{d\kappa(s)}{ds}e_2(s)+\kappa(s)\tau(s)e_3(s)\right)\\
+    =&\kappa(s)^2\tau(s)
+  \end{align*}
+  となる。そして分母は
+  \[
+    \left|\frac{d^2\gamma(s)}{ds^2}\right|^2=\left|\kappa(s)e_2(s)\right|^2=\kappa(s)^2
+  \]
+  となり、従って
+  \[
+    \frac{\left(\frac{d\gamma(s)}{ds}\times\frac{d^2\gamma(s)}{ds^2}\right)\cdot\frac{d^3\gamma(s)}{ds^3}}{\left|\frac{d^2\gamma(s)}{ds^2}\right|^2}=\tau(s)
+  \]
+  が確かめられた。
+\end{proof}
