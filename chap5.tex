@@ -343,7 +343,12 @@
 曲率ゼロということは、全然曲がってないということで、これはもう直線しか出てこないでしょう。
 これは$e_2(s)$が定義できなくなってしまうのでフレネ・セレの公式は使えないのですが、それでもしっかり証明できます。
 \begin{example}
-  $\kappa(s)=0$の曲線は直線のみである。
+  曲線$(\gamma,I)$に関して以下の仮定を満たすとする。
+  \begin{itemize}
+    \item 弧長パラメータづけ可能な2階微分可能な曲線
+    \item $\kappa(s)$は$(\gamma,I)$の曲率
+  \end{itemize}
+  さらに$\kappa(s)=0$ (${}^\forall s\in I$)を満たす場合、$(\gamma,I)$は直線である。
 \end{example}
 \begin{proof}
   $\kappa(s)=0$ゆえ、フレネ・セレの公式は使えないが、
@@ -360,10 +365,16 @@
 \subsection{捩率ゼロの曲線はある平面に含まれる}
 
 続いて捩率ゼロの場合です。
-今回は$\kappa(s)=0$だとつまらないので、フレネ・セレの公式が使える$\kappa(s)>0$の状況で考えましょう。
+$\kappa(s)=0$だと上述のとおりつまらないので、フレネ・セレの公式が使える$\kappa(s)>0$の状況で考えましょう。
 すると、次が成り立ちます。
 \begin{example}
-  $\kappa(s)>0$、$\tau(s)=0$ (${}^\forall s\in s(I)$)を満たす曲線$(\gamma,I)$は、ある平面に含まれる。
+  曲線$(\gamma,I)$に関して以下の仮定を満たすとする。
+  \begin{itemize}
+    \item 弧長パラメータづけ可能な$C^3$級曲線
+    \item 弧長パラメータ$s\in s(I)$について、常に$\frac{d^2\gamma(t(s))}{ds^2}\neq0$
+    \item $\kappa(s)$、$\tau(s)$は$(\gamma,I)$の曲率と捩率
+  \end{itemize}
+  さらに$\kappa(s)>0$、$\tau(s)=0$ (${}^\forall s\in s(I)$)を満たす場合、曲線$(\gamma,I)$はある平面に含まれる。
 \end{example}
 \begin{proof}
   フレネ・セレの公式より、
@@ -381,12 +392,11 @@
   \[
     f(s):=(\gamma(t(s))-p_0)\cdot n
   \]
-  が常にゼロであることを示せばよいです。
+  が常にゼロであることを示せばよい。
   まず仮定より
   \[
     f(s_0)=(\gamma(t(s_0))-\gamma(t(s_0)))\cdot n=0
   \]
-  です。
   ゆえに、示せばよいことは
   \[
     \frac{df}{ds}=0
@@ -403,16 +413,181 @@
 \end{proof}
 この事実は、捩率の「感覚」を向上させることに役立つでしょう。
 つまり捩率とは、\textbf{曲線が平面に乗れない度合い}を測るのです。
-ちなみに平面上の曲線は、$\mathbb{R}^2$との次元の差が1であることから、とても豊かな理論が構築されています。
-それについては後の章で語ることにしましょう。
 
-\subsection{平面に埋め込まれる曲線の捩率}
+\subsection{平面に埋め込まれる曲線の捩率はゼロ}
 
-% TODO
+先ほどは「捩率ゼロならば平面に含まれる」でした。
+念のためではあるのですが、「平面に含まれるならば捩率ゼロ」も示していきましょう。
+\begin{example}
+  曲線$(\gamma,I)$に関して以下の仮定を満たすとする。
+  \begin{itemize}
+    \item 弧長パラメータづけ可能な$C^3$級曲線
+    \item 弧長パラメータ$s\in s(I)$について、常に$\frac{d^2\gamma(t(s))}{ds^2}\neq0$
+    \item $\kappa(s)$、$\tau(s)$は$(\gamma,I)$の曲率と捩率
+  \end{itemize}
+  さらに、$(\gamma,I)$がある平面$H$に含まれるならば、$\tau(s)=0$。
+\end{example}
+\begin{proof}
+  仮定より$\kappa(s)>0$ (${}^\forall s\in s(I)$)。
+  いま、適当に$s_0\in s(I)$をとれば、$\gamma(I)$を含む$H$は
+  \[
+    H=\{p\in\mathbb{R}^3\mid (p-p_0)\cdot n=0\}
+  \]
+  と表わせる。ここで$n\in\mathbb{R}^3$は$H$の単位法線ベクトルである。
+  仮定から、任意の$s\in s(I)$に対して
+  \[
+    (\gamma(t(s))-p_0)\cdot n=0
+  \]
+  が成り立つ。
+  両辺を微分して、
+  \[
+    \frac{d\gamma(t(s))}{ds}\cdot n=e_1(s)\cdot n=0
+  \]
+  を得る。さらに微分すると、フレネ・セレの公式より
+  \[
+    \frac{de_1(s)}{ds}\cdot n=\kappa(s)e_2(s)\cdot n=0
+  \]
+  を得る。
+  $\kappa(s)>0$であるから$e_2(s)\cdot n=0$であるが、これをさらに微分すれば
+  \[
+    \frac{de_2(s)}{ds}\cdot n=(-\kappa(s)e_1(s)+\tau(s)e_3(s))\cdot n=\tau(s)e_3(s)\cdot n=0
+  \]
+  を得る。ここで仮に$\tau(s)\neq0$となる$s\in s(I)$が存在したとすると、
+  \[
+    \begin{cases}
+      e_1(s)\cdot n=0\\
+      e_2(s)\cdot n=0\\
+      e_3(s)\cdot n=0
+    \end{cases}
+  \]
+  が得られてしまうが、これは行列とベクトルの積の等式
+  \[
+    \begin{pmatrix}
+      e_1(s)\\
+      e_2(s)\\
+      e_3(s)
+    \end{pmatrix}
+    n=0
+  \]
+  に他ならない。
+  ところが
+  \[
+    \begin{pmatrix}
+      e_1(s)\\
+      e_2(s)\\
+      e_3(s)
+    \end{pmatrix}
+  \]
+  は直交行列ゆえ逆行列をもつので、左からその逆行列をかければ
+  \[
+    n=0
+  \]
+  を得る。
+  これは最初に$n$を$H$の単位法ベクトルとしたことに矛盾する。
+  よって任意の$s\in s(I)$について$\tau(s)=0$でなければならない。
+\end{proof}
+
+これで「曲線が平面に埋め込まれる $\iff$ 捩率ゼロ」が証明できました。
+ただ一言付け加えると、今回どちらもフレネ・セレの公式を使って証明しましたが、曲線の基本定理を使えば、どちらか片方を示せばもう片方も従っていました。
 
 \subsection{曲率・捩率が定数の場合}
 
-% TODO
+曲率・捩率が0である場合を見てきました。
+次に簡単な場合は、それらが0ではない定数の場合です。
+曲率が0の場合はつまらないので、曲率は0にならないときにどうなるか調べてみましょう。
+ここまでは実は曲線の基本定理を使わず、フレネ・セレの公式だけから証明できることばかりでしたが、次の例は曲線の基本定理を使うのが楽です。
+
+まずは捩率ゼロのときです。
+\begin{example}
+  曲線$(\gamma,I)$に関して以下の仮定を満たすとする。
+  \begin{itemize}
+    \item 弧長パラメータづけ可能な$C^3$級曲線
+    \item 弧長パラメータ$s\in s(I)$について、常に$\frac{d^2\gamma(t(s))}{ds^2}\neq0$
+    \item $\kappa(s)$、$\tau(s)$は$(\gamma,I)$の曲率と捩率
+  \end{itemize}
+  さらに、任意の$s\in s(I)$に対して
+  \[
+    \begin{cases}
+      \kappa(s)=a>0\\
+      \tau(s)=0
+    \end{cases}
+  \]
+  を満たすとする。
+  このとき、曲線$(\gamma,I)$はある円に含まれる。
+\end{example}
+\begin{proof}
+  \[
+    \gamma'(t(s))=\left(\frac1a\cos(as),\frac1a\sin(as),0\right)
+  \]
+  は、曲率$a$、捩率0をもつ曲線である。
+  実際、これは平面$H=\{z=0\}$に含まれるため、捩率0である。
+  また、曲率は
+  \begin{align*}
+    \kappa(s)=\left|\frac{d^2\gamma'(t(s))}{ds^2}\right|=\left|\frac{d}{ds}(-\sin(as),\cos(as),0)\right|=|(-a\cos(as),-a\sin(as),0)|=a
+  \end{align*}
+  となる。
+  ゆえに曲線の基本定理より、曲線$(\gamma,I)$は円$(\gamma',I')$と合同であるから、題意は証明された。
+\end{proof}
+
+\begin{example}
+  曲線$(\gamma,I)$に関して以下の仮定を満たすとする。
+  \begin{itemize}
+    \item 弧長パラメータづけ可能な$C^3$級曲線
+    \item 弧長パラメータ$s\in s(I)$について、常に$\frac{d^2\gamma(t(s))}{ds^2}\neq0$
+    \item $\kappa(s)$、$\tau(s)$は$(\gamma,I)$の曲率と捩率
+  \end{itemize}
+  さらに、任意の$s\in s(I)$に対して
+  \[
+    \begin{cases}
+      \kappa(s)=a>0\\
+      \tau(s)=b\neq0
+    \end{cases}
+  \]
+  を満たすとする。
+  このとき、曲線$(\gamma,I)$はある常螺旋に含まれる。
+\end{example}
+\begin{proof}
+  常螺旋
+  \[
+    \gamma'(t)=\left(\frac{a}{a^2+b^2}\cos(t),\frac{a}{a^2+b^2}\sin(t),\frac{bt}{a^2+b^2}\right)
+  \]
+  を考える。
+  まず、この弧長パラメータは
+  \[
+    s(t)=t\sqrt{\left(\frac{a}{a^2+b^2}\right)^2+\left(\frac{b}{a^2+b^2}\right)^2}=\frac{t}{\sqrt{a^2+b^2}}
+  \]
+  であるから、弧長パラメータ表示は
+  \[
+    \gamma(t(s))=\left(\frac{a}{a^2+b^2}\cos(s\sqrt{a^2+b^2}),\frac{a}{a^2+b^2}\sin(s\sqrt{a^2+b^2}),\frac{bs}{\sqrt{a^2+b^2}}\right)
+  \]
+  となる。この曲率を求めると
+  \[
+    \kappa(s)=\left|\frac{d^2\gamma(t(s))}{ds^2}\right|=|(-a\cos(s\sqrt{a^2+b^2}),-a\sin(s\sqrt{a^2+b^2}),0)|=a
+  \]
+  また、捩率を求めるために、まず次の計算をする
+  \begin{align*}
+    &\frac{d\gamma(t(s))}{ds}\times\frac{d^2\gamma(t(s))}{ds^2}\\
+    =&(-\frac{a}{\sqrt{a^2+b^2}}\sin(s\sqrt{a^2+b^2}),\frac{a}{\sqrt{a^2+b^2}}\cos(s\sqrt{a^2+b^2}),\frac{b}{\sqrt{a^2+b^2}})\\
+    &\times(-a\cos(s\sqrt{a^2+b^2}),-a\sin(s\sqrt{a^2+b^2}),0)\\
+    =&\frac{1}{\sqrt{a^2+b^2}}(ab\sin(s\sqrt{a^2+b^2}),-ab\cos(s\sqrt{a^2+b^2}),a^2)
+  \end{align*}
+  また
+  \[
+    \frac{d^3\gamma(t(s))}{ds^3}=a\sqrt{a^2+b^2}(\sin(s\sqrt{a^2+b^2}),-\cos(s\sqrt{a^2+b^2}),0)
+  \]
+  ゆえに、
+  \[
+    \left(\frac{d\gamma(t(s))}{ds}\times\frac{d^2\gamma(t(s))}{ds^2}\right)\cdot\frac{d^3\gamma(t(s))}{ds^3}=a^2b
+  \]
+  となり、捩率は
+  \[
+    \tau(s)=\frac{\left(\frac{d\gamma(t(s))}{ds}\times\frac{d^2\gamma(t(s))}{ds^2}\right)\cdot\frac{d^3\gamma(t(s))}{ds^3}}{\left|\frac{d^2\gamma(t(s))}{ds^2}\right|^2}=\frac{a^2b}{a^2}=b
+  \]
+  となる。
+  よって曲線の基本定理より、$(\gamma,I)$は常螺旋と合同である。
+  ゆえに題意は示された。
+\end{proof}
+
 
 \subsection{鏡面対象な常螺旋}
 
