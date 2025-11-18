@@ -155,7 +155,7 @@ $r$を求める円の半径とすると、初等的な幾何学の公式によ�
 
 
 
-\section{例題：円、放物線、螺旋の曲率}
+\section{例題：円、常螺旋、楕円、放物線の曲率}
 
 \subsection{円}
 
@@ -232,6 +232,61 @@ $\gamma$は
 円の曲率$1/r$よりも小さいので、半径が同じなら常螺旋のほうが円よりも曲がり具合が緩やかだと言えます。
 これは$z$方向に引き延ばされる分があるからだと考えられます。
 そう思えば直感にも合ってる気がしますね。
+
+\subsection{楕円}
+
+楕円
+\[
+  \gamma(t)=(a\cos(t),b\sin(t),0)
+\]
+の弧長パラメータは
+\begin{align*}
+  s(t)=\int_0^t\sqrt{a^2\sin^2(\tau)+b^2\cos^2(\tau)}d\tau
+\end{align*}
+で、これ以上簡単にはならないのでした。
+だからといって弧長パラメータ付けができてないというわけではないので、よくわからないけどこういう関数だとして曲率を求めてみましょう。
+つまり、合成関数の微分や逆関数の微分を駆使して
+\[
+  e_1(s)=\frac{d\gamma(t(s))}{ds}=\frac{1}{ds/dt}\frac{d\gamma(t)}{dt}=\frac{(-a\sin(t),b\cos(t),0)}{\sqrt{a^2\sin^2(t)+b^2\cos^2(t)}}
+\]
+こういうことです。
+もう一回微分するわけですが、ちょいと大変です。
+\begin{align*}
+  \frac{d^2\gamma(t(s))}{ds^2}&=\frac{d}{ds}\frac{d\gamma(t(s))}{ds}=\frac{1}{ds/dt}\frac{d}{dt}\frac{(-a\sin(t),b\cos(t),0)}{\sqrt{a^2\sin^2(t)+b^2\cos^2(t)}}\\
+  &=\frac{1}{\sqrt{a^2\sin^2(t)+b^2\cos^2(t)}}\frac{d}{dt}\frac{(-a\sin(t),b\cos(t),0)}{\sqrt{a^2\sin^2(t)+b^2\cos^2(t)}}
+\end{align*}
+さすがに一旦ここで止めて、各成分ごとに計算しましょう。
+まず$x$成分は
+\begin{align*}
+  &\frac{1}{\sqrt{a^2\sin^2(t)+b^2\cos^2(t)}}\frac{-a\cos(t)\sqrt{a^2\sin^2(t)+b^2\cos^2(t)}+a\sin(t)\frac{(a^2-b^2)\sin(t)\cos(t)}{\sqrt{a^2\sin^2(t)+b^2\cos^2(t)}}}{a^2\sin^2(t)+b^2\cos^2(t)}\\
+  =&\frac{-ab^2\cos^3(t)-ab^2\sin^2(t)\cos(t)}{(a^2\sin^2(t)+b^2\cos^2(t))^2}\\
+  =&\frac{-ab^2\cos(t)}{(a^2\sin^2(t)+b^2\cos^2(t))^2}
+\end{align*}
+続いて$y$成分
+\begin{align*}
+  &\frac{1}{\sqrt{a^2\sin^2(t)+b^2\cos^2(t)}}\frac{-b\sin(t)\sqrt{a^2\sin^2(t)+b^2\cos^2(t)}-b\cos(t)\frac{(a^2-b^2)\sin(t)\cos(t)}{\sqrt{a^2\sin^2(t)+b^2\cos^2(t)}}}{a^2\sin^2(t)+b^2\cos^2(t)}\\
+  =&\frac{-a^2b\sin^3(t)-a^2b\sin(t)\cos^2(t)}{(a^2\sin^2(t)+b^2\cos^2(t))^2}\\
+  =&\frac{-a^2b\sin(t)}{(a^2\sin^2(t)+b^2\cos^2(t))^2}
+\end{align*}
+ゆえに
+\begin{align*}
+  \frac{d^2\gamma(t(s))}{ds^2}&=\frac{(-ab^2\cos(t),-a^2b\sin(t),0)}{(a^2\sin^2(t)+b^2\cos^2(t))^2}=\frac{-ab(b\cos(t),a\sin(t),0)}{(a^2\sin^2(t)+b^2\cos^2(t))^2}
+\end{align*}
+となりました。
+これの長さ
+\[
+  \kappa(s)=\left|\frac{d^2\gamma(t(s))}{ds^2}\right|=\left|\frac{-ab(b\cos(t),a\sin(t),0)}{(a^2\sin^2(t)+b^2\cos^2(t))^2}\right|=\frac{ab}{(a^2\sin^2(t)+b^2\cos^2(t))^{3/2}}
+\]
+が楕円の曲率となります。
+ゆえに
+\[
+  e_2(s)=-\frac{(b\cos(t),a\sin(t),0)}{\sqrt{a^2\sin^2(t)+b^2\cos^2(t)}}
+\]
+となり、
+\[
+  e_3(s)=e_1(s)\times e_2(s)=(0,0,1)
+\]
+となりました。
 
 \subsection{放物線}
 

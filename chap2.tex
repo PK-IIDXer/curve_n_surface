@@ -290,9 +290,7 @@ $(I,\gamma)$を弧長パラメータ付け可能な曲線、その弧長パラ�
 ゆえ、
 \begin{align*}
   s(t)&=\int_0^t\left|(-a\sin(\tau),b\cos(\tau),0)\right|d\tau\\
-  &=\int_0^t\sqrt{a^2\sin^2(\tau)+b^2\cos^2(\tau)}d\tau\\
-  &=\int_0^t\sqrt{a^2-(a^2-b^2)\cos^2(\tau)}d\tau\\
-  &=a\int_0^t\sqrt{1-\left(1-\frac{b^2}{a^2}\right)\cos^2(\tau)}d\tau
+  &=\int_0^t\sqrt{a^2\sin^2(\tau)+b^2\cos^2(\tau)}d\tau
 \end{align*}
 となります。最後の式はなんか積分できそうですが、無理です。
 いわゆる\textbf{第二種楕円積分}といわれるもので、よく研究されています。
