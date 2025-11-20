@@ -674,10 +674,156 @@ $\kappa(s)=0$だと上述のとおりつまらないので、フレネ・セレ�
 
 \subsection{練習問題}
 
-\begin{example}
-  $a>0$に対して
+\begin{example}[対数螺旋]
+  $a>0$に対して、曲率と捩率が
   \[\kappa:(0,+\infty)\to\mathbb{R};s\mapsto\frac1{as},\quad \tau:(0,+\infty)\to\{0\}\subset\mathbb{R}\]
+  となる曲線を求めよ。
 \end{example}
+\begin{proof}[\textbf{解答例}]
+  $\tau(s)=0$ゆえ平面$z=0$にあるとしてよい。
+  $\gamma(t(s))=(f(s),g(s),0)$とおくと、
+  \begin{align*}
+    \frac{d\gamma(t(s))}{ds}&=e_1(s)=\left(\frac{df(s)}{ds},\frac{dg(s)}{ds},0\right)
+  \end{align*}
+  これは長さ1であるから、次のようにおきなおしてもよい。
+  \begin{align*}
+    \cos(\theta(s)):=\frac{df(s)}{ds},\quad\sin(\theta(s)):=\frac{dg(s)}{ds}
+  \end{align*}
+  このとき$e_2(s)$は、
+  \[
+    e_2(s)=\frac1{\kappa(s)}\frac{de_1(s)}{ds}=as\frac{d\theta(s)}{ds}(-\sin(\theta(s)),\cos(\theta(s)),0)
+  \]
+  となるが、$e_2(s)$も長さ1ゆえに
+  \[
+    as\frac{d\theta(s)}{ds}=\pm1 \text{ すなわち } \frac{d\theta(s)}{ds}=\pm\frac{1}{as}
+  \]
+  となる。両辺を積分すれば、
+  \[
+    \theta(s)=\pm\frac1a\log(s)+C_1
+  \]
+  と求まった($C_1$は積分定数)。
+  ここで複号が表れているが、$\theta(s)$はもともと$e_1(s)=(\cos(\theta(s)),\sin(\theta(s)),0)$を満たすように取ったのであった。
+  従って、複号は曲線が平面上を右回りに回るか、左回りに回るかの違いを表わしている。
+  ゆえに、必要であれば合同変換の一つである鏡映変換を行うことで、複号は$+$の場合のみを考えればよい。
+  \[
+    \theta(s)=\frac1a\log(s)+C_1
+  \]
+
+  $f(s)$を求めるために、$df(s)/ds=\cos(\theta(s))$を積分しなければならない。
+  そのため、$s=e^{au}$と積分変数を変換すれば、
+  \begin{align*}
+    \int\cos(\theta(s))ds&=\int\cos\left(\frac1a\log(s)+C_1\right)ds\\
+    &=\int\cos\left(\frac1a\cdot au+C_1\right)ae^{au}du\\
+    &=a\int e^{au}\cos( u+C_1)du
+  \end{align*}
+  ここで
+  \[
+    I:=a\int e^{au}\cos( u+C_1)du
+  \]
+  とおくと、部分積分によって
+  \begin{align*}
+    I&=\int \frac{de^{au}}{du}\cos( u+C_1)du\\
+    &=e^{au}\cos( u+C_1)+\int e^{au}\sin( u+C_1)du\\
+    &=e^{au}\cos( u+C_1)+\int \left(\frac1a\frac{de^{au}}{du}\right)\sin( u+C_1)du\\
+    &=e^{au}\cos( u+C_1)+\left(\frac1ae^{au}\sin( u+C_1)-\frac1a\int e^{au}\cos( u+C_1)du\right)\\
+    &=e^{au}\cos( u+C_1)+\frac1ae^{au}\sin( u+C_1)-\frac1{a^2}I
+  \end{align*}
+  となるため、$I/a^2$を移項して、
+  \begin{align*}
+    &\left(1+\frac1{a^2}\right)I=e^{au}\cos( u+C_1)+\frac1ae^{au}\sin( u+C_1)\\
+    \iff&\frac{1+a^2}{a^2}I=e^{au}\cos( u+C_1)+\frac1ae^{au}\sin( u+C_1)\\
+    \iff&I=\frac{a^2e^{au}\cos( u+C_1)+ ae^{au}\sin( u+C_1)}{1+a^2}
+  \end{align*}
+  となって、まとめると
+  \[
+    f(s)=\frac{ae^{au}(a\cos( u+C_1)+ \sin( u+C_1))}{1+a^2}+C_2
+  \]
+  が求まった($C_2$は積分定数)。
+  同様に$g(s)$は
+  \[
+    g(s)=\frac{ae^{au}(a\sin( u+C_1)- \cos( u+C_1))}{1+a^2}+C_3
+  \]
+  となる($C_3$は積分定数)。
+  合同変換の一種である平行移動を考慮すれば、$C_2=C_3=0$としてよい。
+  \begin{align*}
+    f(s)&=\frac{ae^{au}(a\cos( u+C_1)+\sin( u+C_1))}{1+a^2}\\
+    g(s)&=\frac{ae^{au}(a\sin( u+C_1)-\cos( u+C_1))}{1+a^2}
+  \end{align*}
+  これは回転行列によって
+  \[
+    \begin{pmatrix}
+      f(s)\\
+      g(s)
+    \end{pmatrix}
+    =
+    \frac{ae^{au}}{1+a^2}
+    \begin{pmatrix}
+      \cos(u+C_1) & -\sin(u+C_1)\\
+      \sin(u+C_1) & \cos(u+C_1)
+    \end{pmatrix}
+    \begin{pmatrix}
+      a\\
+      -1
+    \end{pmatrix}
+  \]
+  と表わすことができる\footnote{
+    便宜上、座標を列ベクトルとして扱い、行列演算を行っている。
+  }。
+  回転行列の加法定理により、
+  \[
+    \begin{pmatrix}
+      f(s)\\
+      g(s)
+    \end{pmatrix}
+    =
+    \frac{ae^{au}}{1+a^2}
+    \begin{pmatrix}
+      \cos(C_1) & -\sin(C_1)\\
+      \sin(C_1) & \cos(C_1)
+    \end{pmatrix}
+    \begin{pmatrix}
+      \cos(u) & -\sin(u)\\
+      \sin(u) & \cos(u)
+    \end{pmatrix}
+    \begin{pmatrix}
+      a\\
+      -1
+    \end{pmatrix}
+  \]
+  と表わせるから、合同変換の一つである回転行列
+  \[
+    \begin{pmatrix}
+      \cos(C_1) & -\sin(C_1)\\
+      \sin(C_1) & \cos(C_1)
+    \end{pmatrix}
+  \]
+  を掛ける操作は同一視してよい。
+  つまり$C_1=0$としてもよいということである。
+  従って求める曲線は、$s=e^{au}$を戻して
+  \begin{align*}
+    \gamma(t(s))&=\left(\frac{ae^{au}(a\cos(u)+\sin(u))}{1+a^2},\frac{ae^{au}(a\sin(u)-\cos(u))}{1+a^2},0\right)\\
+    &=\frac{as}{1+a^2}\left(a\cos\left(\frac1a\log(s)\right)+\sin\left(\frac1a\log(s)\right),a\sin\left(\frac1a\log(s)\right)-\cos\left(\frac1a\log(s)\right),0\right)
+  \end{align*}
+\end{proof}
+ところで、$\gamma(s)$の原点からの長さを$r$とすると、
+\[
+  r(s):=|\gamma(s)|=\frac{as}{\sqrt{1+a^2}}
+\]
+と求まります。
+また、解答の中に現れた$\theta(s)$は
+\[
+  \theta(s)=\frac1a\log(s) \text{ すなわち } s=e^{ a\theta(s)}
+\]
+だったので、この曲線はいわゆる極方程式
+\[
+  r=\frac{a}{\sqrt{1+a^2}}e^{ a\theta}
+\]
+を満たす曲線です。
+これは\textbf{対数螺旋}と呼ばれます。
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{img/licensed-image.jpg}
+\end{figure}
 
 \begin{example}
   \[\kappa:(0,+\infty)\to\mathbb{R};s\mapsto\frac1{\sqrt{s}},\quad \tau:(0,+\infty)\to\{0\}\subset\mathbb{R}\]
@@ -685,5 +831,5 @@ $\kappa(s)=0$だと上述のとおりつまらないので、フレネ・セレ�
 
 \begin{example}
   $a>0$に対して、
-  \[\kappa:\mathbb{R}\to\mathbb{R};s\mapsto\frac{a}{a^2+s^2},\quad \tau:(0,+\infty)\to\{0\}\subset\mathbb{R}\]
+  \[\kappa:\mathbb{R}\to\mathbb{R};s\mapsto\frac{a}{a^2+s^2},\quad \tau:\mathbb{R}\to\{0\}\subset\mathbb{R}\]
 \end{example}
