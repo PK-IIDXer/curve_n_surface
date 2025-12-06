@@ -100,7 +100,7 @@
 
 Light Coneの原点での特異性を排除するために、仮定しなければいけないことが分かりました。
 \begin{definition}[滑らかな曲面]
-  $r>0$を整数とする。曲面$S\subset\mathbb{R}^3$が$C^r$級の(滑らかな)曲線であるとは、次のようなアトラス$\{(U_\alpha,\varphi_\alpha)\}_{\alpha\in\Lambda}$が存在する時を言う。
+  $r>0$を整数とする。曲面$S\subset\mathbb{R}^3$が$C^r$級の(滑らかな)曲面であるとは、次のようなアトラス$\{(U_\alpha,\varphi_\alpha)\}_{\alpha\in\Lambda}$が存在する時を言う。
   \begin{enumerate}
     \item 任意の$\alpha\in\Lambda$に対して、$\varphi_\alpha$は$\varphi_\alpha^{-1}(U_\alpha)$上$C^r$級
     \item 任意の$\alpha\in\Lambda$に対して、$\varphi_\alpha^{-1}(U_\alpha)$上常に$\partial_1\varphi_\alpha\times\partial_2\varphi_\alpha\neq0$
@@ -115,10 +115,10 @@ Light Coneの原点での特異性を排除するために、仮定しなけれ�
 \section{ガウスの公式}
 
 $C^r$曲面の2.の条件は、とりもなおさず$\partial_1\varphi_\alpha$と$\partial_2\varphi_\alpha$が$\mathbb{R}$上一次独立であることと同値です。
-そのため、曲面の点$p\in S$に対して、それに接する平面であるところの\textbf{接平面}定義できます。
+そのため、曲面の点$p\in S$に対して、それに接する平面であるところの\textbf{接平面}と定義できます。
 \begin{definition}[接平面]
   $C^1$級の滑らかな曲面$S\subset\mathbb{R}^3$のチャート$(U,\varphi)$を一枚取る。
-  このとき、任意の$x\in\varphi^{-1}(U)$に対して、ベクトル$\partial_1\varphi(0)$および$\partial_2\varphi(0)$が張るベクトル空間を
+  このとき、任意の$x\in\varphi^{-1}(U)$に対して、ベクトル$\partial_1\varphi(x)$および$\partial_2\varphi(x)$が張るベクトル空間を
   \[
     T_{\varphi(x)}S:=\left\{v^1\partial_1\varphi(x)+v^2\partial_2\varphi(x)\mid v^1,v^2\in\mathbb{R}\right\}
   \]
@@ -170,7 +170,7 @@ $C^r$曲面の2.の条件は、とりもなおさず$\partial_1\varphi_\alpha$�
       h_{21}(x) & h_{22}(x)
     \end{pmatrix}
   \]
-  を、曲面$U$上の\textbf{第二基本形式}という。
+  を、曲面$S$の$U$上の\textbf{第二基本形式}という。
 \end{definition}
 
 
@@ -197,10 +197,10 @@ $C^r$曲面の2.の条件は、とりもなおさず$\partial_1\varphi_\alpha$�
   \]
   \item[\textbf{ガウスの公式}]
   \begin{align*}
-    \partial_1^2\varphi(x)&=\Gamma_{11}^1\partial_1\varphi(x)+\Gamma_{11}^2\partial_2\varphi(x)+h_{11}(x)\mathbf{n}(x)\\
-    \partial_1\partial_2\varphi(x)&=\Gamma_{12}^1\partial_1\varphi(x)+\Gamma_{12}^2\partial_2\varphi(x)+h_{12}(x)\mathbf{n}(x)\\
-    \partial_2\partial_1\varphi(x)&=\Gamma_{21}^1\partial_1\varphi(x)+\Gamma_{21}^2\partial_2\varphi(x)+h_{21}(x)\mathbf{n}(x)\\
-    \partial_2^2\varphi(x)&=\Gamma_{22}^1\partial_1\varphi(x)+\Gamma_{22}^2\partial_2\varphi(x)+h_{22}(x)\mathbf{n}(x)
+    \partial_1^2\varphi(x)&=\Gamma_{11}^1(x)\partial_1\varphi(x)+\Gamma_{11}^2(x)\partial_2\varphi(x)+h_{11}(x)\mathbf{n}(x)\\
+    \partial_1\partial_2\varphi(x)&=\Gamma_{12}^1(x)\partial_1\varphi(x)+\Gamma_{12}^2(x)\partial_2\varphi(x)+h_{12}(x)\mathbf{n}(x)\\
+    \partial_2\partial_1\varphi(x)&=\Gamma_{21}^1(x)\partial_1\varphi(x)+\Gamma_{21}^2(x)\partial_2\varphi(x)+h_{21}(x)\mathbf{n}(x)\\
+    \partial_2^2\varphi(x)&=\Gamma_{22}^1(x)\partial_1\varphi(x)+\Gamma_{22}^2(x)\partial_2\varphi(x)+h_{22}(x)\mathbf{n}(x)
   \end{align*}
 \end{description}
 いや…あんまり似てないかもです。
@@ -235,7 +235,7 @@ $C^r$曲面の2.の条件は、とりもなおさず$\partial_1\varphi_\alpha$�
   &=0
 \end{align*}
 より、$\mathbf{v}'_2(x)$は$\mathbf{v}_1(x)$と直交します。
-さらに、$\mathbf{v}_1(x)$は$\partial_1\varphi(x)$と平行なので、それと1次独立な$\partial_2\varphi(x)$との0でない線形和で表わされている$\mathbf{v}'_2(x)$は$\mathbf{n}$と直交であり、かつ0ではありません。
+さらに、$\mathbf{v}_1(x)$は$\partial_1\varphi(x)$と平行なので、それと1次独立な$\partial_2\varphi(x)$との0でない線形和で表わされている$\mathbf{v}'_2(x)$は$\mathbf{n}(x)$と直交であり、かつ0ではありません。
 
 このようにして、正規直交基底
 \begin{align*}
@@ -265,3 +265,158 @@ $C^r$曲面の2.の条件は、とりもなおさず$\partial_1\varphi_\alpha$�
   \]
   を第一基本量、あるいは\textbf{リーマン計量}という。
 \end{definition}
+
+\subsection{ガウスの公式をもてあそぶ}
+
+ガウスの公式は
+\begin{align*}
+  \partial_1^2\varphi(x)&=\Gamma_{11}^1(x)\partial_1\varphi(x)+\Gamma_{11}^2(x)\partial_2\varphi(x)+h_{11}(x)\mathbf{n}(x)\\
+  \partial_1\partial_2\varphi(x)&=\Gamma_{12}^1(x)\partial_1\varphi(x)+\Gamma_{12}^2(x)\partial_2\varphi(x)+h_{12}(x)\mathbf{n}(x)\\
+  \partial_2\partial_1\varphi(x)&=\Gamma_{21}^1(x)\partial_1\varphi(x)+\Gamma_{21}^2(x)\partial_2\varphi(x)+h_{21}(x)\mathbf{n}(x)\\
+  \partial_2^2\varphi(x)&=\Gamma_{22}^1(x)\partial_1\varphi(x)+\Gamma_{22}^2(x)\partial_2\varphi(x)+h_{22}(x)\mathbf{n}(x)
+\end{align*}
+という形でした。
+まとめてしまって
+\begin{align*}
+  \partial_i\partial_j\varphi(x)=\Gamma_{ij}^1(x)\partial_1\varphi(x)+\Gamma_{ij}^2(x)\partial_2\varphi(x)+h_{ij}(x)\mathbf{n}(x)
+\end{align*}
+と書き、この両辺に$\partial_k\varphi(x)$を内積すると、
+\begin{align*}
+  \left<\partial_k\varphi(x),\partial_i\partial_j\varphi(x)\right>=\Gamma_{ij}^1(x)g_{k1}(x)+\Gamma_{ij}^2(x)g_{k2}(x)
+\end{align*}
+が得られます。
+これを$k=1,2$の順で並べると、
+\begin{align*}
+  \left<\partial_1\varphi(x),\partial_i\partial_j\varphi(x)\right>&=\Gamma_{ij}^1(x)g_{11}(x)+\Gamma_{ij}^2(x)g_{12}(x)\\
+  \left<\partial_2\varphi(x),\partial_i\partial_j\varphi(x)\right>&=\Gamma_{ij}^1(x)g_{21}(x)+\Gamma_{ij}^2(x)g_{22}(x)
+\end{align*}
+となります。
+右辺がいかにも行列$\begin{pmatrix}
+  g_{11}(x)&g_{12}(x)\\
+  g_{21}(x)&g_{22}(x)
+\end{pmatrix}$
+を掛けた式として見えます。
+そう書いてみましょう。
+\[
+  \begin{pmatrix}
+    g_{11}(x) & g_{12}(x)\\
+    g_{21}(x) & g_{22}(x)
+  \end{pmatrix}
+  \begin{pmatrix}
+    \Gamma_{ij}^1 \\ \Gamma_{ij}^2
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+    \left<\partial_1\varphi(x),\partial_i\partial_j\varphi(x)\right>\\
+    \left<\partial_2\varphi(x),\partial_i\partial_j\varphi(x)\right>
+  \end{pmatrix}
+\]
+計算を進めるには、$\begin{pmatrix}
+  g_{11}(x)&g_{12}(x)\\
+  g_{21}(x)&g_{22}(x)
+\end{pmatrix}$が正則行列であることを確かめなければいけません。
+\begin{lemma}
+  $C^1$級の滑らかな曲面$S\subset\mathbb{R}^3$のチャート$(U,\varphi)$を一枚取る。
+  $g_{ij}(x)=\left<\partial_i\varphi(x),\partial_j\varphi(x)\right>$を$S$の$U$におけるリーマン計量とする。
+  このとき
+  \[
+    \begin{pmatrix}
+      g_{11}(x) & g_{12}(x)\\
+      g_{21}(x) & g_{22}(x)
+    \end{pmatrix}
+  \]
+  は逆行列をもつ。
+\end{lemma}
+\begin{proof}
+  \begin{align*}
+    \det
+    \begin{pmatrix}
+      g_{11}(x) & g_{12}(x)\\
+      g_{21}(x) & g_{22}(x)
+    \end{pmatrix}
+    &=g_{11}(x)g_{22}(x)-g_{12}(x)g_{21}(x)=g_{11}(x)g_{22}(x)-g_{12}(x)^2\\
+    &=|\partial_1\varphi(x)|^2|\partial_2\varphi(x)|^2-\left<\partial_1\varphi(x),\partial_2\varphi(x)\right>^2
+  \end{align*}
+  ここで$\partial_1\varphi(x)$と$\partial_2\varphi(x)$のなす角を$\theta\in(0,\pi)$とすると、
+  \begin{align*}
+    \det
+    \begin{pmatrix}
+      g_{11}(x) & g_{12}(x)\\
+      g_{21}(x) & g_{22}(x)
+    \end{pmatrix}
+    &=|\partial_1\varphi(x)|^2|\partial_2\varphi(x)|^2-\left<\partial_1\varphi(x),\partial_2\varphi(x)\right>^2\\
+    &=|\partial_1\varphi(x)|^2|\partial_2\varphi(x)|^2-|\partial_1\varphi(x)|^2|\partial_2\varphi(x)|^2\cos^2(\theta)\\
+    &=|\partial_1\varphi(x)|^2|\partial_2\varphi(x)|^2(1-\cos^2(\theta))\\
+    &=|\partial_1\varphi(x)|^2|\partial_2\varphi(x)|^2\sin^2(\theta)\\
+    &=|\partial_1\varphi(x)\times\partial_2\varphi(x)|^2
+  \end{align*}
+  最後の実数が0にならないことは、我々の曲面の定義に含めてあったため、題意が従う。
+\end{proof}
+よって、この逆行列を
+\[
+  \begin{pmatrix}
+    g^{11}(x) & g^{12}(x)\\
+    g^{21}(x) & g^{22}(x)
+  \end{pmatrix}
+  :=
+  \frac{1}{g_{11}(x)g_{22}(x)-g_{12}(x)g_{21}(x)}
+  \begin{pmatrix}
+    g_{22}(x) & -g_{12}(x)\\
+    -g_{21}(x) & g_{11}(x)
+  \end{pmatrix}
+\]
+とおけば、
+\[
+  \begin{pmatrix}
+    \Gamma_{ij}^1(x) \\ \Gamma_{ij}^2(x)
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+    g^{11}(x) & g^{12}(x)\\
+    g^{21}(x) & g^{22}(x)
+  \end{pmatrix}
+  \begin{pmatrix}
+    \left<\partial_1\varphi(x),\partial_i\partial_j\varphi(x)\right>\\
+    \left<\partial_2\varphi(x),\partial_i\partial_j\varphi(x)\right>
+  \end{pmatrix}
+\]
+右辺もリーマン計量で書けそうな予感がします。というのも、
+\begin{align*}
+  \partial_ig_{1j}(x)&=\partial_i\left<\partial_1\varphi(x),\partial_j\varphi(x)\right>\\
+  &=\left<\partial_i\partial_1\varphi(x),\partial_j\varphi(x)\right>+\left<\partial_1\varphi(x),\partial_i\partial_j\varphi(x)\right>
+\end{align*}
+また
+\begin{align*}
+  \partial_1g_{ij}(x)&=\partial_1\left<\partial_i\varphi(x),\partial_j\varphi(x)\right>\\
+  &=\left<\partial_1\partial_i\varphi(x),\partial_j\varphi(x)\right>+\left<\partial_i\varphi(x),\partial_1\partial_j\varphi(x)\right>
+\end{align*}
+\begin{align*}
+  \partial_jg_{i1}(x)&=\partial_j\left<\partial_i\varphi(x),\partial_j\varphi(x)\right>\\
+  &=\left<\partial_j\partial_i\varphi(x),\partial_1\varphi(x)\right>+\left<\partial_i\varphi(x),\partial_j\partial_1\varphi(x)\right>
+\end{align*}
+から、
+\[
+  \partial_jg_{i1}(x)+\partial_ig_{1j}(x)-\partial_1g_{ij}(x)=2\left<\partial_1\varphi(x),\partial_i\partial_j\varphi(x)\right>
+\]
+が得られます！
+同様にして、
+\[
+  \partial_jg_{i2}(x)+\partial_ig_{2j}(x)-\partial_2g_{ij}(x)=2\left<\partial_2\varphi(x),\partial_i\partial_j\varphi(x)\right>
+\]
+もわかるので、なんと本当に$\Gamma_{ij}^k(x)$をリーマン計量だけで求めることができました！
+\begin{theorem}
+  $C^2$級の滑らかな曲面$S\subset\mathbb{R}^3$のチャート$(U,\varphi)$を一枚取る。
+  このとき、ガウスの公式
+  \begin{align*}
+    \partial_1^2\varphi(x)&=\Gamma_{11}^1(x)\partial_1\varphi(x)+\Gamma_{11}^2(x)\partial_2\varphi(x)+h_{11}(x)\mathbf{n}(x)\\
+    \partial_1\partial_2\varphi(x)&=\Gamma_{12}^1(x)\partial_1\varphi(x)+\Gamma_{12}^2(x)\partial_2\varphi(x)+h_{12}(x)\mathbf{n}(x)\\
+    \partial_2\partial_1\varphi(x)&=\Gamma_{21}^1(x)\partial_1\varphi(x)+\Gamma_{21}^2(x)\partial_2\varphi(x)+h_{21}(x)\mathbf{n}(x)\\
+    \partial_2^2\varphi(x)&=\Gamma_{22}^1(x)\partial_1\varphi(x)+\Gamma_{22}^2(x)\partial_2\varphi(x)+h_{22}(x)\mathbf{n}(x)
+  \end{align*}
+  を満たす$\Gamma_{ij}^k(x)$は、リーマン計量$g_{ij}$によって次のようにあらわされる。
+  \[
+    \Gamma_{ij}^k(x)=\sum_{l=1}^2\frac12g^{kl}(x)(\partial_jg_{il}(x)+\partial_ig_{lj}(x)-\partial_lg_{ij}(x))
+  \]
+  従って$\Gamma_{ij}^k$は$\varphi^{-1}(U)$上連続な関数となる。
+  特に曲面$S$が$C^r$級($r\geq2$)ならば、$\Gamma_{ij}^k$は$C^{r-2}$級関数である。
+\end{theorem}
