@@ -11,7 +11,52 @@
 
 
 
+\section{ガウス曲率}
+
+さて、ちょっと直感的な議論をしましょう。
+曲線のときは、3点を通る円を考え、その極限として「曲率半径」と「曲率」が一意に定まりました。
+では、曲面$S$上の点$p\in S$についても同様に、「$p$近傍の点を通る球面」を考えることで、曲面の曲率を定義できないでしょうか？
+
+実は、ここには大きな落とし穴があります。
+実際に試してみましょう。
+点$p$における曲面の法線ベクトルを$n$とします。
+この法線$n$を含む平面$\Pi$で曲面$S$をスパッと切断してみます。
+すると、切断面には曲線$\gamma$が現れます（これを法切断線と呼びます）。
+
+この曲線$\gamma$は、前節で議論した「曲線」そのものですから、点$p$において接触円を考えることができます。
+この円の半径を$R$とすれば、曲率$\kappa=1/R$が求まります。
+
+しかし、法線$n$を含む平面$\Pi$は、法線を軸としてくるくると$360^\circ$回転させることができます。
+平面を回転させると、切り口である曲線$\gamma$の形状も変わってしまいます。
+\begin{itemize}
+  \item ある方向で切ったときは緩やかなカーブ（$R$が大きい）かもしれない。
+  \item 別の方向で切ったときは急なカーブ（$R$が小さい）かもしれない。
+\end{itemize}
+つまり、切る方向によって「接触円の半径」が変化してしまうのです。
+したがって、曲線のように「ただ一つの半径$R$」で曲面の曲がり具合を表すことはできません。
+
+% TODO 鞍点の図。
+
+しょうがないということで曲面論では、あらゆる方向で切断したときの曲率の中で、
+\begin{itemize}
+  \item 最大の曲がり具合を持つ値$\kappa_1$
+  \item 最小の曲がり具合を持つ値$\kappa_2$
+\end{itemize}
+に注目します。
+最大値・最小値が存在することは、法線を軸とした平面に対して曲率を返す関数が実質、コンパクト空間$S^1$上の関数となっていることから決まります。
+これらを\textbf{主曲率}と呼びます。
+そして、この2つの積
+\[
+  K=\kappa_1\kappa_2
+\]
+を\textbf{ガウス曲率}といいます。
+このガウス曲率が驚くべき量と結びつくとは、このときまだガウスは知る由もなかったのかもしれない・・・！
+
+
+
 \section{曲面の定義}
+
+さて、雑な議論ばかりで進んでもよくない。僕たちが考えるべき曲面をしっかり定義しましょう。
 
 まずは曲面$S$というものが、$\mathbb{R}^3$に浮いている状況を考えます。
 いきなりこれをまるっと取り扱うのはどう考えても難しいので、ある点$p\in S$の開近傍$U$\footnote{
@@ -113,6 +158,15 @@ Light Coneの原点での特異性を排除するために、仮定しなけれ�
 
 
 \section{ガウスの公式}
+
+\begin{definition}[滑らかな曲面:再掲]
+  $r>0$を整数とする。曲面$S\subset\mathbb{R}^3$が$C^r$級の(滑らかな)曲面であるとは、次のようなアトラス$\{(U_\alpha,\varphi_\alpha)\}_{\alpha\in\Lambda}$が存在する時を言う。
+  \begin{enumerate}
+    \item 任意の$\alpha\in\Lambda$に対して、$\varphi_\alpha$は$\varphi_\alpha^{-1}(U_\alpha)$上$C^r$級
+    \item 任意の$\alpha\in\Lambda$に対して、$\varphi_\alpha^{-1}(U_\alpha)$上常に$\partial_1\varphi_\alpha\times\partial_2\varphi_\alpha\neq0$
+  \end{enumerate}
+  もし無限回微分可能なチャートからなるアトラスを選び出すことができた場合、$S$は$C^\infty$級曲面とよぶ。
+\end{definition}
 
 $C^r$曲面の2.の条件は、とりもなおさず$\partial_1\varphi_\alpha$と$\partial_2\varphi_\alpha$が$\mathbb{R}$上一次独立であることと同値です。
 そのため、曲面の点$p\in S$に対して、それに接する平面であるところの\textbf{接平面}と定義できます。
@@ -266,7 +320,7 @@ $C^r$曲面の2.の条件は、とりもなおさず$\partial_1\varphi_\alpha$�
   を第一基本量、あるいは\textbf{リーマン計量}という。
 \end{definition}
 
-\subsection{ガウスの公式をもてあそぶ}
+\subsection{クリストッフェル記号はリーマン計量で書ける}
 
 ガウスの公式は
 \begin{align*}
@@ -417,6 +471,126 @@ $C^r$曲面の2.の条件は、とりもなおさず$\partial_1\varphi_\alpha$�
   \[
     \Gamma_{ij}^k(x)=\sum_{l=1}^2\frac12g^{kl}(x)(\partial_jg_{il}(x)+\partial_ig_{lj}(x)-\partial_lg_{ij}(x))
   \]
-  従って$\Gamma_{ij}^k$は$\varphi^{-1}(U)$上連続な関数となる。
-  特に曲面$S$が$C^r$級($r\geq2$)ならば、$\Gamma_{ij}^k$は$C^{r-2}$級関数である。
+  従って$\Gamma_{ij}^k(x)$は$\varphi^{-1}(U)$上連続な関数となる。
+  特に曲面$S$が$C^r$級($r\geq2$)ならば、$\Gamma_{ij}^k(x)$は$C^{r-2}$級関数である。
 \end{theorem}
+
+\subsection{アインシュタインの規約}
+
+そろそろ
+\[
+  \Gamma_{ij}^k(x)=\sum_{l=1}^2\frac12g^{kl}(x)(\partial_jg_{il}(x)+\partial_ig_{lj}(x)-\partial_lg_{ij}(x))
+\]
+などと、添え字に関する和の記号をいちいち書き込むのもつらくなってきます。
+そこで微分幾何学の計算では、よくこの和の記号を以下のように取っ払ってしまいます。
+\[
+  \Gamma_{ij}^k(x)=\frac12g^{kl}(x)(\partial_jg_{il}(x)+\partial_ig_{lj}(x)-\partial_lg_{ij}(x))
+\]
+これらは同じ内容の数式を表わしています。
+これを\textbf{アインシュタインの規約}といいます。
+
+どのように和の記号をなくすかというと、同じ添え字が上と下に現れているとき、それに関する和の記号は打ち消します。
+こうすることで、例えばガウスの公式は
+\[
+  \partial_i\partial_j\varphi(x)=\Gamma_{ij}^k(x)\partial_k\varphi(x)+h_{ij}(x)\mathbf{n}(x)
+\]
+という一本の式になってしまいます。
+このことによって数学の新たな発見があるというわけではなく、単なるサボりにすぎないのですが、アインシュタインが使い始めてから広く使われています。
+僕たちも彼に倣ってアインシュタインの規約を使っていきましょう。
+
+\subsection{$h_{ij}$をリーマン計量で書けるか？}
+
+この要領で$h_{ij}(x)$もリーマン計量だけで書けそうな気がします。
+いけそうでしょうか？
+$h_{ij}(x)$は、曲面が法線方向に伸びる強さを表わしているので、「曲面の曲がり具合」を最もよく反映する関数と考えられます。
+これを抽出するには、安直にガウスの公式をさらに微分するとよいでしょう。
+\begin{align*}
+  &\partial_i\partial_j\partial_k\varphi(x)\\
+  =&\partial_i\left(\Gamma_{jk}^l(x)\partial_l\varphi(x)+h_{jk}(x)\mathbf{n}(x)\right)\\
+  =&\partial_i\Gamma_{jk}^l(x)\partial_l\varphi(x)+\Gamma_{jk}^l(x)\partial_i\partial_l\varphi(x)+\partial_ih_{jk}(x)\mathbf{n}(x)+h_{jk}(x)\partial_i\mathbf{n}(x)\\
+  =&\partial_i\Gamma_{jk}^l(x)\partial_l\varphi(x)+\Gamma_{jk}^l(x)\left(\Gamma_{il}^m(x)\partial_m\varphi(x)+h_{il}(x)\mathbf{n}(x)\right)+\partial_ih_{jk}(x)\mathbf{n}(x)+h_{jk}(x)\partial_i\mathbf{n}(x)\\
+  =&\left(\partial_i\Gamma_{jk}^m(x)+\Gamma_{jk}^l(x)\Gamma_{il}^m(x)\right)\partial_m\varphi(x)+\left(\Gamma_{jk}^l(x)h_{il}(x)+\partial_ih_{jk}(x)\right)\mathbf{n}(x)+h_{jk}(x)\partial_i\mathbf{n}(x)
+\end{align*}
+一旦ここで式変形は止めましょう。
+
+厄介なのは$\partial_i\mathbf{n}(x)$です。
+これを求めるために、$\mathbf{n}(x)$と$\partial_i\varphi(x)$が直交であることを使用しましょう。
+\[
+  \partial_j\varphi(x)\cdot\mathbf{n}(x)=0
+\]
+この両辺を微分すると、
+\begin{align*}
+  0&=\partial_i(\partial_j\varphi(x)\cdot\mathbf{n}(x))\\
+  &=\partial_i\partial_j\varphi(x)\cdot\mathbf{n}(x)+\partial_j\varphi(x)\cdot\partial_i\mathbf{n}(x)\\
+  &=\left(\Gamma_{ij}^k(x)\partial_k\varphi(x)+h_{ij}(x)\mathbf{n}(x)\right)\cdot\mathbf{n}(x)+\partial_j\varphi(x)\cdot\partial_i\mathbf{n}(x)\\
+  &=h_{ij}(x)+\partial_j\varphi(x)\cdot\partial_i\mathbf{n}(x)
+\end{align*}
+また、$1=\mathbf{n}(x)\cdot\mathbf{n}(x)$の両辺を微分すれば
+\begin{align*}
+  0=\partial_i(\mathbf{n}(x)\cdot\mathbf{n}(x))=\partial_i\mathbf{n}(x)\cdot\mathbf{n}(x)+\mathbf{n}(x)\cdot\partial_i\mathbf{n}(x)=2\partial_i\mathbf{n}(x)\cdot\mathbf{n}(x)
+\end{align*}
+であることから、$\partial_i\mathbf{n}(x)$は$\mathbf{n}(x)$と垂直な平面、すなわち$\partial_1\varphi(x)$と$\partial_2\varphi(x)$で張られる平面に存在します。
+そこで
+\[
+  \partial_i\mathbf{n}(x):=w_i^k\partial_k\varphi(x)
+\]
+とおき、
+\[
+  \partial_j\varphi(x)\cdot\partial_i\mathbf{n}(x)=-h_{ij}(x)
+\]
+に代入すれば、
+\begin{align*}
+  &\partial_j\varphi(x)\cdot w_i^k\partial_k\varphi(x)=-h_{ij}(x)\\
+  \therefore\;&w_i^kg_{jk}(x)=-h_{ij}(x)\\
+  \therefore\;&w_i^k=-g^{jk}(x)h_{ij}(x)
+\end{align*}
+となります。
+ここで$g^{jk}(x)$はリーマン計量$g_{jk}(x)$の逆行列です。
+従って、
+\[
+  \partial_i\mathbf{n}(x)=-g^{jk}(x)h_{ij}(x)\partial_k\varphi(x)
+\]
+が得られました。この等式には名前が付けられているので、定理として紹介しましょう。
+\begin{theorem}[ワインガルテンの公式]
+  $C^3$級の滑らかな曲面$S\subset\mathbb{R}^3$のチャート$(U,\varphi)$を一枚取る。
+  このとき、ガウスの公式
+  \begin{align*}
+    \partial_i\partial_j\varphi(x)&=\Gamma_{ij}^k(x)\partial_k\varphi(x)+h_{ij}(x)\mathbf{n}(x)
+  \end{align*}
+  を満たす$\mathbf{n}(x)$は、リーマン計量$g_{ij}(x)$によって次のようにあらわされる。
+  \[
+    \partial_i\mathbf{n}(x)=-g^{jk}(x)h_{ij}(x)\partial_k\varphi(x)
+  \]
+  これを\textbf{ワインガルテンの公式}と呼ぶ。
+\end{theorem}
+
+このワインガルテンの公式を$\partial_i\partial_j\partial_k\varphi(x)$に代入すると、以下が得られます。
+\begin{align*}
+  &\partial_i\partial_j\partial_k\varphi(x)\\
+  =&\left(\partial_i\Gamma_{jk}^m(x)+\Gamma_{jk}^l(x)\Gamma_{il}^m(x)\right)\partial_m\varphi(x)+\left(\Gamma_{jk}^l(x)h_{il}(x)+\partial_ih_{jk}(x)\right)\mathbf{n}(x)\\
+    &-h_{jk}(x)g^{nm}(x)h_{in}(x)\partial_m\varphi(x)\\
+  =&\left(\partial_i\Gamma_{jk}^m(x)+\Gamma_{jk}^l(x)\Gamma_{il}^m(x)-h_{jk}(x)g^{nm}(x)h_{in}(x)\right)\partial_m\varphi(x)+\left(\Gamma_{jk}^l(x)h_{il}(x)+\partial_ih_{jk}(x)\right)\mathbf{n}(x)
+\end{align*}
+
+さてここまでは$\partial_i\partial_j\partial_k\varphi(x)$を計算したにすぎません。
+$\varphi(x)$は$C^3$級とすると、$\partial_i\partial_j\partial_k\varphi(x)$は微分をする順序に依存しません。
+そこで$i$と$j$を入れ替えて計算して、関係式を作っていきましょう。
+\begin{align*}
+  &\partial_j\partial_i\partial_k\varphi(x)\\
+  =&\left(\partial_j\Gamma_{ik}^m(x)+\Gamma_{ik}^l(x)\Gamma_{jl}^m(x)-h_{ik}(x)g^{nm}(x)h_{jn}(x)\right)\partial_m\varphi(x)+\left(\Gamma_{ik}^l(x)h_{jl}(x)+\partial_jh_{ik}(x)\right)\mathbf{n}(x)
+\end{align*}
+
+このことから二つの関係式が得られました。
+
+\begin{itemize}
+  \item $\displaystyle \partial_i\Gamma_{jk}^m(x)-\partial_j\Gamma_{ik}^m(x)+\Gamma_{jk}^l(x)\Gamma_{il}^m(x)-\Gamma_{ik}^l(x)\Gamma_{jl}^m(x)-h_{jk}(x)g^{nm}(x)h_{in}(x)+h_{ik}(x)g^{nm}(x)h_{jn}(x)=0$
+  \item $\displaystyle \Gamma_{jk}^l(x)h_{il}(x)-\Gamma_{ik}^l(x)h_{jl}(x)+\partial_ih_{jk}(x)-\partial_jh_{ik}(x)=0$
+\end{itemize}
+
+第一式を\textbf{ガウスの方程式}とよび、第二式は\textbf{コダッチの方程式}と呼びます。
+特にガウスの方程式が成り立つことは、大数学者ガウスをして驚かせたことで有名です\footnote{
+  この等式はTheorema Egregiumとして引用されているようです。
+  Egregiumには「素晴らしい」「注目すべき」とかの意味があるようです。
+  なので実は英語でいう「Remarkable」ぐらいの温度感なんじゃないかしら？
+}。
+この等式の素晴らしさを知るためには、今までこねくり回してきた式の、幾何学的な意味を知る必要がありましょう。
